@@ -1,4 +1,4 @@
-import { Paths } from './routes';
+import { Paths } from './Routes';
 
 function App() {
 
