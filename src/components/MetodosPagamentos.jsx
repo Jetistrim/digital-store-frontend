@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { InputMask } from "primereact/inputmask";
-import { Tooltip } from "primereact/tooltip";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
 import { Dialog } from "primereact/dialog";
 import visa from "../assets/images/visa.svg";
 import Modal from "./Modal";
 import Cards from "react-credit-cards-2";
 import "react-credit-cards-2/dist/es/styles-compiled.css";
+import { Button } from "primereact/button";
 
 
 const MetodosPagamentos = () => {
@@ -17,7 +17,7 @@ const MetodosPagamentos = () => {
     identifier: "",
     number: "",
     expiry: "",
-    cvv: "",
+    cvc: "",
     name: "",
     focus: "",
   });
@@ -37,20 +37,23 @@ const MetodosPagamentos = () => {
       numero: "4756 5469 8547 2020",
       nome: "Francisco Antonio Pereira",
       validade: "12/25",
-      cvv: "123",
+      cvc: "123",
       bandeira: visa,
     },
   ]);
 
   const handleDelete = (id) => {
     confirmDialog({
-      message: "Você tem certeza que deseja excluir este cartão?",
-      rejectClassName:
-        "px-4 py-1 mt-3 ml-10 lg:ml-36 outline-none rounded text-primary-1 hover:text-tertiary hover:bg-white font-bold",
-      acceptClassName:
-        "px-4 py-1 mt-3 ml-4 outline-none rounded text-light-gray-3 bg-primary-1 hover:bg-tertiary font-bold",
+      header: 'Aviso',
+      message: "Deseja excluir este cartão?",
+      acceptLabel: 'Sim',
+      rejectLabel: 'Não',
       reject: () => setOpenModal(false),
       accept: () => setCartoes(cartoes.filter((cartao) => cartao.id !== id)),
+      rejectClassName:
+        "px-4 py-1 ml-10 lg:ml-28 rounded text-primary-1 border hover:text-tertiary hover:border hover:border-primary-1 font-bold",
+      acceptClassName:
+        "px-4 py-1 ml-3 rounded text-white bg-primary-1 hover:bg-tertiary font-bold",
     });
   };
 
@@ -74,7 +77,7 @@ const MetodosPagamentos = () => {
            identifier: "",
            number: "",
            expiry: "",
-           cvv: "",
+           cvc: "",
            name: "",
            focus: "",
          });
@@ -83,6 +86,7 @@ const MetodosPagamentos = () => {
 
   return (
     <div>
+     <ConfirmDialog className="custom-confirm-dialog" />
       <section className="bg-white min-w-[315px] h-[466px] lg:w-[890px] lg:h-[466px] mx-5 lg:mr-[101px] flex flex-col items-start justify-start px-5 lg:py-5 font-sans rounded">
         <div className="w-full flex flex-col lg:flex-row lg:justify-between lg:items-center mt-1">
           <h6 className="order-none font-bold text-sm tracking-[0.75px] leading-[22px] text-dark-gray-2">
@@ -121,24 +125,11 @@ const MetodosPagamentos = () => {
                   <dd>{`**** **** **** ${cartao.numero.slice(-4)}`}</dd>
                 </div>
               </div>
-              <div className="card flex justify-content-center">
-                <Tooltip
-                  target=".custom-target-icon"
-                  className="absolute top-1/2 bg-primary-1 text-white rounded text-sm"
-                />
+              <div className="card flex justify-content-center">                
                 <i
-                  className="relative custom-target-icon pi pi-trash text-primary-1 cursor-pointer text-sm"
-                  data-pr-tooltip="Excluir"
-                  data-pr-position="right"
-                  data-pr-at="right-32 bottom"
-                  data-pr-my="left center-30"
+                  className="pi pi-trash text-primary-1 cursor-pointer"
                   onClick={() => handleDelete(cartao.id)}
                 ></i>
-                <ConfirmDialog
-                  className="bg-light-gray-3 drop-shadow-lg text-dark-gray-2 font-bold rounded w-[315px] md:w-[350px] lg:w-[420px] px-4 py-2 lg:py-4 lg:px-4 absolute -translate-y-10 lg:-translate-y-40 lg:right-72"
-                  rejectLabel="Não"
-                  acceptLabel="Sim"
-                />
               </div>
               <div className="hidden gap-2 mb-[10px]">
                 <dt className="text-light-gray">Nome:</dt>
@@ -157,7 +148,7 @@ const MetodosPagamentos = () => {
         </div>
       </section>
       <Modal visible={openModal} onClose={() => setOpenModal(false)}>
-        <div className="bg-white shadow transition-all flex-col justify-center items-center h-[550px] w-[315px] lg:w-[700px] lg:h-[466px] overflow-auto lg:gap-2 lg:px-4 pt-5 pl-5 rounded">
+        <div className="bg-white shadow transition-all flex-col justify-center items-center h-[550px] w-[315px] lg:w-[700px] lg:h-[466px] overflow-auto lg:gap-2 lg:px-4 pt-4 pl-5 rounded">
           <div className="flex gap-3">
             <div className="flex-col">
               <h2 className="text-lg font-semibold mb-1 ml-1 text-dark-gray">
@@ -226,7 +217,7 @@ const MetodosPagamentos = () => {
                   />
                 </div>
 
-                <div className=" flex flex-col lg:flex-row mb-2 lg:gap-3">
+                <div className=" flex flex-col lg:flex-row lg:gap-3">
                   <div className="inline-flex flex-col mb-2 lg:w-1/3">
                     <label
                       htmlFor="expiry"
@@ -249,42 +240,49 @@ const MetodosPagamentos = () => {
                       className="bg-light-gray-3 rounded outline-none p-2 text-dark-gray-3 focus:shadow-[0_0_0_0.2rem_#e1e1e1]"
                     />
                   </div>
-                  <div className="relative inline-flex flex-col mb-2 lg:w-1/3">
+                  <div className="relative inline-flex flex-col lg:w-1/3">
                     <label
-                      htmlFor="cvv"
+                      htmlFor="cvc"
                       className="text-light-gray font-semibold text-sm"
                     >
                       CVV:
                     </label>
                     <input
                       type="text"
-                      name="cvv"
+                      name="cvc"
                       required
                       autoComplete="cc-csc"
                       pattern="^\d{3,4}$"
-                      value={state.cvv}
+                      value={state.cvc}
                       onChange={handleInputChange}
                       onFocus={handleInputFocus}
                       className="bg-light-gray-3 rounded outline-none p-2 text-dark-gray-3 focus:shadow-[0_0_0_0.2rem_#e1e1e1]"
                     />
                     <i
-                      className="pi pi-question-circle text-dark-gray-3 cursor-pointer absolute top-1/2 right-3"
+                      className="pi pi-question-circle text-dark-gray-3 cursor-pointer absolute top-8 right-3"
                       onClick={() => setVisible(true)}
                     ></i>
-                    <Dialog
-                      className="bg-light-gray-3 text-dark-gray-3 drop-shadow-md leading-5 lg:leading-6 tracking-tight lg:tracking-normal rounded w-2/3 md:w-1/4 p-4 text-justify font-bold border"
-                      visible={visible}
-                      onHide={() => {
-                        if (!visible) return;
-                        setVisible(false);
-                      }}
-                    >
-                      <p className="m-0 text-dark-gray-2">
-                        O número CVV é representado pelos três últimos dígitos
-                        no verso do seu cartão. Em cartões American Express, o
-                        CVV é um número de 4 dígitos na frente do cartão.
-                      </p>
-                    </Dialog>
+                    <div className="card flex justify-content-center">
+                      <Button
+                        icon="pi pi-external-link"
+                        onClick={() => setVisible(true)}
+                      />
+                      <Dialog
+                        header="Atenção"
+                        visible={visible}
+                        style={{ width: "50vw" }}
+                        onHide={() => {
+                          if (!visible) return;
+                          setVisible(false);
+                        }}
+                      >
+                        <p className="m-0">
+                          O número CVV é representado pelos três últimos dígitos
+                          no verso do seu cartão. Em cartões American Express, o
+                          CVV é um número de 4 dígitos na frente do cartão.
+                        </p>
+                      </Dialog>
+                    </div>
                   </div>
                 </div>
                 <div className="flex justify-center items-center lg:justify-end w-full gap-3 lg:mr-10">
@@ -308,7 +306,7 @@ const MetodosPagamentos = () => {
               <Cards
                 number={state.number}
                 expiry={state.expiry}
-                cvc={state.cvv}
+                cvc={state.cvc}
                 name={state.name}
                 focused={state.focus}
                 placeholders={{ name: "NOME" }}

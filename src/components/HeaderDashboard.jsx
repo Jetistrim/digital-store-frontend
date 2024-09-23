@@ -11,13 +11,13 @@ const HeaderDashboard = () => {
             <nav>
                 <ul>
                     <li>
-                        <NavLink to={'/dashboard'}>Dashboard</NavLink>
+                        <NavLink className={'text-black'} to={'/dashboard'}>Dashboard</NavLink>
                     </li>
                     <li>
-                        <NavLink to={'/dashboard/usuarios'}>Usuários</NavLink>
+                        <NavLink className={'text-black'} to={'/dashboard/usuarios'}>Usuários</NavLink>
                     </li>
                     <li>
-                        <NavLink to={'/dashboard/marcas'}>Marcas</NavLink>
+                        <NavLink className={'text-black'} to={'/dashboard/marcas'}>Marcas</NavLink>
                     </li>
                 </ul>
             </nav>

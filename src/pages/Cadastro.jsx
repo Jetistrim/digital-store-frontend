@@ -14,8 +14,8 @@ const Cadastro = () => {
 
   return (
     <main className="flex items-center justify-center w-full bg-gradient-to-b from-secondary-1 to-secondary-2 ">
-      <section className=" flex gap-8">
-        <div className="w-[315px] h-[411px] lg:h-[399px] lg:w-[583px] rounded flex flex-col items-center lg:items-start justify-center p-5 bg-white font-sans mt-9">
+      <section className=" flex gap-8 mt[63px] mt-[63px] mb-[82px] lg:mt-[76px] lg:mb-[60px]">
+        <div className="w-[315px] h-[411px] lg:h-[399px] lg:w-[583px] rounded flex flex-col items-center lg:items-start justify-center p-5 bg-white font-sans lg:mt-5 lg:ml-[50px]">
           <header className="flex flex-col items-center lg:items-start justify-center lg:justify-start h-[84px] mb-3 lg:mb-5">
             <h3 className="text-dark-gray text-center font-bold text-xl tracking-widest leading-8 lg:text-3xl lg:tracking-wider lg:leading-9 lg:mb-3">
               Crie sua conta
@@ -37,7 +37,7 @@ const Cadastro = () => {
               Email *
             </label>
             <div className="mb-5">
-              <InputText className="bg-light-gray-3 text-dark-gray-3 text-sm lg:text-base rounded-lg leading-7 tracking-wider pl-4 w-full h-[60px] outline-none focus:shadow-[0_0_0_0.2rem_#e1e1e1]"
+              <InputText className="bg-light-gray-3 text-dark-gray-3 text-sm lg:text-base rounded-lg leading-7 tracking-wider pl-[12px] lg:pl-4 w-full h-[60px] outline-none focus:shadow-[0_0_0_0.2rem_#e1e1e1]"
                 type="text"
                 placeholder="Insira seu email"
                 autoComplete="email"
@@ -79,7 +79,7 @@ const Cadastro = () => {
         </div>
         <div className="hidden lg:flex items-center justify-center">
           <img
-            className="w-[400px] h-auto lg:w-[500px]"
+            className="w-[400px] h-auto lg:w-[600px]"
             src="src/assets/images/tenis.png"
             alt="Tênis"
           />

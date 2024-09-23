@@ -247,7 +247,7 @@ const MinhasInformacoes = () => {
             </button>
             <button
               type="button"
-              className="w-28 h-11 py-2 px-4 mb-4 text-primary-1 hover:text-tertiary hover:bg-secondary-2 font-bold text-sm tracking-wider hover:shadow-md rounded"
+              className="w-28 h-11 py-2 px-4 mb-4 text-primary-1 hover:text-tertiary hover:bg-light-gray-3 font-bold text-sm tracking-wider hover:shadow-md rounded"
               onClick={() => setVisible(false)}
             >
               Cancelar

@@ -1,5 +1,8 @@
 import { Outlet } from "react-router-dom";
 import { styled } from "styled-components";
+// import "primereact/resources/themes/bootstrap4-dark-blue/theme.css";
+import "primeflex/primeflex.css";
+import "primeicons/primeicons.css";
 import HeaderDashboard from "../../components/HeaderDashboard";
 
 const DashboardLayoutContainer = styled.main``;
