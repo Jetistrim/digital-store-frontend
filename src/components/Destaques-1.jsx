@@ -14,6 +14,8 @@ import PropTypes from "prop-types"
 import styled from "styled-components";
 import Button from "./buttons/Buttons";
 import { Link } from "react-router-dom";
+import axios from 'axios';
+import { useEffect, useState } from "react";
 
 const Highlights1WrapperContainer = styled.div`
 * {
@@ -158,16 +160,34 @@ HighlightCard.propTypes = {
 }
 
 const Destaques1 = () => {
-    return (
-        <Highlights1WrapperContainer>
+
+    const [data, setData] = useState()
+
+
+
+    
+    useEffect(() => {
+        const fetchData = async () => {
+            const response = await axios.get('http://localhost:3000/sapatos')
+            setData(response.data)
+        }
+        fetchData()
+    }, [])
+
+    console.log("data");
+    return 
+        !data || data.length === 0 ?
+        (<Highlights1WrapperContainer>
             <h3 className={`colections ${window.innerWidth >= 768 ? "text-large" : "text-small"} bold`}>Coleções em Destaque</h3>
             <div className="cards-container">
                 <HighlightCard img="Highlight-shirt.svg" title="New drop Supreme" discount="30" />
                 <HighlightCard img="Highlight-shoe.svg" title="Adidas Colection" discount="30" />
-                <HighlightCard img="Highlight-headphone.svg" title="New Beats Bass" discount="30" />
+                <HighlightCard img="Highlight-headphone.svg" title="New Beats Bass" discount={data[0].sapato_discount} />
             </div>
         </Highlights1WrapperContainer>
-    );
+    ) : (
+        <p className="text-black">Loading...</p>
+    )
 }
 
 export default Destaques1;
