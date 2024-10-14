@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  background-color: #f9f8fe;
+}
+
 .p-dialog-footer {
   background-color: white;
 }  

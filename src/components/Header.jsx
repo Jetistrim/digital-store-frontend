@@ -10,7 +10,7 @@
 
 
 import styled from "styled-components";
-import { default as But } from '../components/buttons/Buttons.jsx';
+import { default as But } from './buttons/Buttons';
 import { Link, NavLink } from "react-router-dom";
 
 const HeaderContainer = styled.header`
@@ -619,11 +619,7 @@ const Usuario = () => {
             </div>
             <div className="login">
                 <Link to="/login" >
-                    <But
-                        className={"text-extra-small bold"}
-                        buttonType="primary-button"
-                        label={"Entrar"}
-                    />
+                    <But className="text-extra-small bold" buttonType="primary" label="Entrar" />
                 </Link>
             </div>
         </>
@@ -713,7 +709,7 @@ const Carrin = () => {
                     <div className="ab">
                         <Link className="text-small esvaziar" to="/" >Esvaziar</Link>
                         <Link to='/meu-carrinho'>
-                            <But className={"text-small bold ver-carrin-maior"} label={"Ver Carrinho"} buttonType="primary-button"></But>
+                            <But className="text-small bold ver-carrin-maior" label="Ver Carrinho" buttonType="primary" />
                         </Link>
                     </div>
                 </div>

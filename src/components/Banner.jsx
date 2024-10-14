@@ -12,12 +12,11 @@
 
 import PropTypes from "prop-types"
 import styled from "styled-components";
-import { default as But } from "./buttons/Buttons.jsx";
+import { default as But } from "./buttons/Buttons";
 import { useEffect, useRef, useState } from "react";
 
 const BannersBigWraperContainer = styled.div`
     overflow: hidden;
-    background-color: var(--light-gray-3);
     width: 100%;
     height: 662px;
     display: flex;
@@ -66,15 +65,9 @@ const BannersBigWraperContainer = styled.div`
             height: 12px;
             border-radius: 6px;
             transition: background-color ease 300ms;
-            background-color: var(--light-gray-2);
 
             &:hover {
                 background-color: #007bffaa;
-
-            }
-
-            &.active {
-                background-color: var(--primary);
             }
         }
     }
@@ -123,7 +116,6 @@ const Banner1Container = styled.div`
         display: flex;
         flex-direction: column;
         text-align: center;
-        color: black;
         justify-content: start;
         width: calc(100vw - 40px);
         overflow-wrap: normal;
@@ -137,17 +129,7 @@ const Banner1Container = styled.div`
             margin: 124px 0 0 100px;
         }
 
-        & h4{
-            margin: 0;
-            color: var(--primary);
-
-            @media (min-width: 768px) {
-                color: var(--warning)
-            }
-        }
-
         & h2 {
-            color: var(--dark-gray);
             font-family: "Inter";
             font-weight: 800px;
             font-size: 40px;
@@ -160,11 +142,6 @@ const Banner1Container = styled.div`
                 line-height: 66px;
                 margin: 20px 0;
             }
-        }
-
-        & p{
-            margin: 0;
-            color: var(--dark-gray-2);
         }
 
         & button{
@@ -184,10 +161,10 @@ const Banner = (props) => {
     return (
         <Banner1Container id={props.id}>
             <div className="propag">
-                <h4 className="text-small bold">Melhores ofertas personalizadas</h4>
-                <h2>Queima de stoque Nike 🔥</h2>
-                <p className={window.innerWidth <= 768 ? "text-extra-small" : "text-medium"}>{props.textinho}</p>
-                <But buttonType="primary-button" label="Clique Aqui" className={"text-small bold"} />
+                <h4 className="text-small bold m-0 text-primary-1 md:text-warning">Melhores ofertas personalizadas</h4>
+                <h2 className="text-dark-gray">Queima de stoque Nike 🔥</h2>
+                <p className={`m-0 text-dark-gray-2 ${window.innerWidth <= 768 ? "text-extra-small" : "text-medium"}`}>{props.textinho}</p>
+                <But buttonType="primary" label="Clique Aqui" className="text-small bold text-light-gray-3" />
             </div>
             <img className="sapato" src="White-Sneakers.svg" />
             {/* <img className="pirilampos" src="Ornament 11.svg" /> */}
@@ -205,7 +182,6 @@ const Banners = () => {
     const bannersWrapperRef = useRef(null);
     const intervalRef = useRef(null);
 
-    // Handle click on banner. This function is triggered when a user clicks on a banner.
     const handleBannerClick = (index) => {
         setActiveBannerIndex(index);
 
@@ -214,20 +190,16 @@ const Banners = () => {
             behavior: 'auto',
         });
 
-        // Clear the interval when the component unmounts to restart the auto slide.
         clearInterval(intervalRef.current);
         autoSlide();
     };
 
-    // Automatically switch to the next banner every 3 seconds.
     const autoSlide = () => intervalRef.current = setInterval(() => {
         setActiveBannerIndex((prevIndex) => (prevIndex + 1) % 4);
     }, 3000);
 
-    // Reload the auto slide.
     const reloadAutoSlide = () => clearInterval(intervalRef.current);
 
-    // Start the auto slide when the component mounts. Stop it when the component unmounts.
     useEffect(() => {
         autoSlide();
 
@@ -236,7 +208,6 @@ const Banners = () => {
         }
     }, []);
 
-    // This makes sure the banners wrapper scrolls to the active banner when the active banner index changes.
     useEffect(() => {
         bannersWrapperRef.current.scrollTo({
             left: activeBannerIndex * window.innerWidth,
@@ -245,7 +216,7 @@ const Banners = () => {
     }, [activeBannerIndex]);
     
     return (
-        <BannersBigWraperContainer>
+        <BannersBigWraperContainer className="bg-light-gray-3">
 
             <div className="banners-wrapper" ref={bannersWrapperRef}>
                 <Banner id="banner1" textinho="bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb Lorem ipsum, dolor sit amet consectetur adipisicing elit." />
@@ -256,7 +227,7 @@ const Banners = () => {
 
             <ul className="banners-links">
             {[1, 2, 3, 4].map((index) => (
-                <li key={index} onClick={() => {handleBannerClick(index - 1)}} className={index === activeBannerIndex + 1 ? 'active' : ''} />
+                <li key={index} onClick={() => {handleBannerClick(index - 1)}} className={`bg-light-gray-2 ${index === activeBannerIndex + 1 ? 'bg-primary-1' : ''}`} />
             ))}
             </ul>
 

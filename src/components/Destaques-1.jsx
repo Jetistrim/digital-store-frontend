@@ -12,7 +12,7 @@
 
 import PropTypes from "prop-types"
 import styled from "styled-components";
-import Button from "./buttons/Buttons";
+import { default as But } from "./buttons/Buttons";
 import { Link } from "react-router-dom";
 import axios from 'axios';
 import { useEffect, useState } from "react";
@@ -31,11 +31,6 @@ const Highlights1WrapperContainer = styled.div`
     @media (min-width: 768px) {
         margin: 38px 0 100px;
         width: calc(100% - 13.88%);
-    }
-
-    & .colections{
-        color: var(--dark-gray-2);
-        align-self: flex-start;
     }
 
     & .cards-container{
@@ -87,14 +82,9 @@ const Highlights1WrapperContainer = styled.div`
                 justify-content: space-between;
                 align-items: center;
                 z-index: 1;
-
-                    & p{
-                        color: var(--dark-gray-2);
-                    }
                 }
 
                 & h3{
-                    color: var(--dark-gray);
                     height: 72px;
                     z-index: 1;
                 }
@@ -135,14 +125,14 @@ const HighlightCard = (props) => {
         <div className={`item ${props.className}`}>
             <div className="texts">
                 <div className="discount">
-                    <p className="percentage text-extra-small bold">{props.discount}%</p>
-                    <p className="text-extra-small bold">OFF</p>
+                    <p className="text-dark-gray-2 percentage text-extra-small bold">{props.discount}</p>
+                    <p className="text-dark-gray-2 text-extra-small bold">OFF</p>
                 </div>
-                <h3 className="keynote title-extra-small bold">
+                <h3 className="text-dark-gray keynote title-extra-small bold">
                     {props.title}
                 </h3>
                 <Link to="/produtos">
-                    <Button buttonType="secondary-button" label={"Comprar"} className={"text-small bold"}></Button>
+                    <But buttonType="secondary" label="Comprar" className="text-small bold" />
                 </Link>
             </div>
             <div className="image">
@@ -163,9 +153,6 @@ const Destaques1 = () => {
 
     const [data, setData] = useState()
 
-
-
-    
     useEffect(() => {
         const fetchData = async () => {
             const response = await axios.get('http://localhost:3000/sapatos')
@@ -174,20 +161,21 @@ const Destaques1 = () => {
         fetchData()
     }, [])
 
-    console.log("data");
-    return 
-        !data || data.length === 0 ?
-        (<Highlights1WrapperContainer>
-            <h3 className={`colections ${window.innerWidth >= 768 ? "text-large" : "text-small"} bold`}>Coleções em Destaque</h3>
-            <div className="cards-container">
-                <HighlightCard img="Highlight-shirt.svg" title="New drop Supreme" discount="30" />
-                <HighlightCard img="Highlight-shoe.svg" title="Adidas Colection" discount="30" />
-                <HighlightCard img="Highlight-headphone.svg" title="New Beats Bass" discount={data[0].sapato_discount} />
-            </div>
-        </Highlights1WrapperContainer>
-    ) : (
-        <p className="text-black">Loading...</p>
-    )
+    console.log(data);
+
+    return !data || data.length === 0 ?
+        (
+            <p className="text-black">Loading...</p>
+        ) : (
+            <Highlights1WrapperContainer>
+                <h3 className={`text-dark-gray-2 self-start ${window.innerWidth >= 768 ? "text-large" : "text-small"} bold`}>Coleções em Destaque</h3>
+                <div className="cards-container">
+                    <HighlightCard img="Highlight-shirt.svg" title="New drop Supreme" discount={(data[0].sapato_discount/100).toLocaleString("pt-BR", { style: 'percent'})} />
+                    <HighlightCard img="Highlight-shoe.svg" title="Adidas Colection" discount={(data[0].sapato_discount/100).toLocaleString("pt-BR", { style: 'percent'})} />
+                    <HighlightCard img="Highlight-headphone.svg" title="New Beats Bass" discount={(data[0].sapato_discount/100).toLocaleString("pt-BR", { style: 'percent'})} />
+                </div>
+            </Highlights1WrapperContainer>
+        )
 }
 
 export default Destaques1;
