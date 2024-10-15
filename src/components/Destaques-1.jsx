@@ -122,17 +122,17 @@ const Highlights1WrapperContainer = styled.div`
 `
 const HighlightCard = (props) => {
     return (
-        <div className={`item ${props.className}`}>
+        <div className={`item ${props.className || ""}`}>
             <div className="texts">
                 <div className="discount">
                     <p className="text-dark-gray-2 percentage text-extra-small bold">{props.discount}</p>
                     <p className="text-dark-gray-2 text-extra-small bold">OFF</p>
                 </div>
-                <h3 className="text-dark-gray keynote title-extra-small bold">
+                <h3 className="text-dark-gray keynote c-title-extra-small bold">
                     {props.title}
                 </h3>
                 <Link to="/produtos">
-                    <But buttonType="secondary" label="Comprar" className="text-small bold" />
+                    <But buttonType="secondary" label="Comprar" className="c-text-small bold" />
                 </Link>
             </div>
             <div className="image">

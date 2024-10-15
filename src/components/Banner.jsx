@@ -161,10 +161,10 @@ const Banner = (props) => {
     return (
         <Banner1Container id={props.id}>
             <div className="propag">
-                <h4 className="text-small bold m-0 text-primary-1 md:text-warning">Melhores ofertas personalizadas</h4>
+                <h4 className="c-text-small bold m-0 text-primary-1 md:text-warning">Melhores ofertas personalizadas</h4>
                 <h2 className="text-dark-gray">Queima de stoque Nike 🔥</h2>
-                <p className={`m-0 text-dark-gray-2 ${window.innerWidth <= 768 ? "text-extra-small" : "text-medium"}`}>{props.textinho}</p>
-                <But buttonType="primary" label="Clique Aqui" className="text-small bold text-light-gray-3" />
+                <p className={`m-0 text-dark-gray-2 ${window.innerWidth <= 768 ? "c-text-extra-small" : "c-text-medium"}`}>{props.textinho}</p>
+                <But buttonType="primary" label="Clique Aqui" className="c-text-small bold text-light-gray-3" />
             </div>
             <img className="sapato" src="White-Sneakers.svg" />
             {/* <img className="pirilampos" src="Ornament 11.svg" /> */}

@@ -14,7 +14,11 @@ import { default as But } from './buttons/Buttons';
 import { Link, NavLink } from "react-router-dom";
 
 const HeaderContainer = styled.header`
-
+:root{
+    --primary: #C92071;
+    --dark-gray-2: #474747;
+    --dark-gray-3: #666666;
+}
 
     display: flex;
     align-items: center;
@@ -29,7 +33,6 @@ const HeaderContainer = styled.header`
     }
 
     .container{
-        background-color: var(--white);
         padding: 20px;
         display: flex;
         width: 100%;
@@ -60,7 +63,6 @@ const HeaderContainer = styled.header`
             & > .cadastre{
                 display: none;
                 a {
-                    color: var(--dark-gray-2);
                     margin-left: 10px;
                 }
                 @media (min-width: 768px){
@@ -93,7 +95,6 @@ const HeaderContainer = styled.header`
             left: 0;
             width: 100vw;
             height: 66.5px;
-            background-color: var(--white);
 
             @media (min-width: 768px) {
                 display: none;
@@ -154,7 +155,6 @@ const HeaderContainer = styled.header`
             position: fixed;
             top: 66.5px;
             left: 0px;
-            background-color: var(--white);
             height: calc(100vh - 66.5px);
             width: 308px;
             padding: 30px;
@@ -163,11 +163,6 @@ const HeaderContainer = styled.header`
             transform: translateX(-100%);
             opacity: 0;
 
-            & p {
-                color: var(--dark-gray-2);
-                margin: 0;
-            }
-
             & nav {
                 display: flex;
                 flex-direction: column;
@@ -175,7 +170,6 @@ const HeaderContainer = styled.header`
                 margin-top: 20px;
 
                 & a {
-                    color: var(--dark-gray-3);
                     text-decoration: none;
                     width: fit-content;
     
@@ -614,12 +608,12 @@ const DigitalLogo = () => {
 const Usuario = () => {
     return (
         <>
-            <div className="cadastre">
-                <Link className="text-small" to="/cadastro" >Cadastre-se</Link>
+            <div className="cadastre text-dark-gray-2">
+                <Link className="c-text-small" to="/cadastro" >Cadastre-se</Link>
             </div>
             <div className="login">
                 <Link to="/login" >
-                    <But className="text-extra-small bold" buttonType="primary" label="Entrar" />
+                    <But className="c-text-extra-small bold" buttonType="primary" label="Entrar" />
                 </Link>
             </div>
         </>
@@ -628,14 +622,14 @@ const Usuario = () => {
 
 const Links = () => {
     return (
-        <div className="links">
-            <p className="text-small bold">Páginas</p>
+        <div className="links bg-white">
+            <p className="c-text-small bold m-0 text-dark-gray-2">Páginas</p>
 
             <nav>
-                <NavLink to="/" className={(a) => `${whereNavLink(a)} text-small`} >Home</NavLink>
-                <NavLink to="/produtos" className={(a) => `${whereNavLink(a)} text-small`} >Produtos</NavLink>
-                <NavLink to="/categorias" className={(a) => `${whereNavLink(a)} text-small`} >Categorias</NavLink>
-                <NavLink to="/meu-perfil" className={(a) => `${whereNavLink(a)} text-small`} >Meus Pedidos</NavLink>
+                <NavLink to="/" className={(a) => `${whereNavLink(a)} c-text-small text-dark-gray-3`} >Home</NavLink>
+                <NavLink to="/produtos" className={(a) => `${whereNavLink(a)} c-text-small text-dark-gray-3`} >Produtos</NavLink>
+                <NavLink to="/categorias" className={(a) => `${whereNavLink(a)} c-text-small text-dark-gray-3`} >Categorias</NavLink>
+                <NavLink to="/meu-perfil" className={(a) => `${whereNavLink(a)} c-text-small text-dark-gray-3`} >Meus Pedidos</NavLink>
             </nav>
             <div className="but-link">
                 <Usuario />
@@ -666,19 +660,19 @@ const Carrin = () => {
                 <label className="p-badge" htmlFor="carrinho">2</label>
             </div>
             <div className="dropdown-carrin">
-                <p className="text-small bold">Meu Carrinho</p>
+                <p className="c-text-small bold">Meu Carrinho</p>
                 <div className="prods">
                     <div className="wrapper">
                         <img src="Batata.png" alt="" />
                         <div className="info">
-                            <p className="descricao title-small bold">
+                            <p className="descricao c-title-small bold">
                                 Batata premium
                             </p>
                             <div className="valores">
-                                <p className="descontado text-small bold">
+                                <p className="descontado c-text-small bold">
                                     R$ 10,00
                                 </p>
-                                <p className="valor text-extra-small">
+                                <p className="valor c-text-extra-small">
                                     R$ 19,00
                                 </p>
                             </div>
@@ -687,14 +681,14 @@ const Carrin = () => {
                     <div className="wrapper">
                         <img src="Batata.png" alt="" />
                         <div className="info">
-                            <p className="descricao title-small bold">
+                            <p className="descricao c-title-small bold">
                                 Batata Premium
                             </p>
                             <div className="valores">
-                                <p className="descontado text-small bold">
+                                <p className="descontado c-text-small bold">
                                     R$ 10,00
                                 </p>
-                                <p className="valor text-extra-small">
+                                <p className="valor c-text-extra-small">
                                     R$ 19,00
                                 </p>
                             </div>
@@ -703,13 +697,13 @@ const Carrin = () => {
                 </div>
                 <div className="down">
                     <div className="total">
-                        <p className="valor text-small bold">Valor Total:</p>
-                        <p className="num-valor text-small bold">R$50,00</p>
+                        <p className="valor c-text-small bold">Valor Total:</p>
+                        <p className="num-valor c-text-small bold">R$50,00</p>
                     </div>
                     <div className="ab">
-                        <Link className="text-small esvaziar" to="/" >Esvaziar</Link>
+                        <Link className="c-text-small esvaziar" to="/" >Esvaziar</Link>
                         <Link to='/meu-carrinho'>
-                            <But className="text-small bold ver-carrin-maior" label="Ver Carrinho" buttonType="primary" />
+                            <But className="c-text-small bold ver-carrin-maior" label="Ver Carrinho" buttonType="primary" />
                         </Link>
                     </div>
                 </div>
@@ -723,10 +717,10 @@ const Header = () => {
 
     return (
         <HeaderContainer>
-            <div className="container">
+            <div className="container bg-white">
                 <div className="top-side">
 
-                    <div className="fundo"></div>
+                    <div className="fundo bg-white"></div>
 
                     <label className="overlay" htmlFor="menu-sidebar"></label>
                     <input type="checkbox" id="menu-sidebar" />
@@ -742,7 +736,7 @@ const Header = () => {
 
                     <div className="search-buy">
                         <div className="MenuTopBarSearch">
-                            <input type="text" className="text-small" placeholder="Pesquisar produto..." />
+                            <input type="text" className="c-text-small" placeholder="Pesquisar produto..." />
                             <Link to="/produtos">
                                 <img src="Search.svg" />
                             </Link>

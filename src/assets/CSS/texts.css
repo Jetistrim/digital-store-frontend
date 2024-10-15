@@ -1,18 +1,13 @@
 /* Font Family */
 @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 
-/* Global Styles */
-html {
-    background-color: var(--light-gray-3);
-}
-
 body {
     font-family: "Inter", primeicons;
     margin: 0;
 }
 
 /* Title Large - H1 */
-.title-large {
+.c-title-large {
     font-size: 64px;
     font-weight: 400;
     line-height: 66px;
@@ -20,7 +15,7 @@ body {
 }
 
 /* Title Medium - H2 */
-.title-medium {
+.c-title-medium {
     font-size: 48px;
     font-weight: 400;
     line-height: 5px;
@@ -28,7 +23,7 @@ body {
 }
 
 /* Title Small - H3 */
-.title-small {
+.c-title-small {
     font-size: 32px;
     font-weight: 400;
     line-height: 36px;
@@ -36,7 +31,7 @@ body {
 }
 
 /* Title Extra Small - H4 */
-.title-extra-small {
+.c-title-extra-small {
     font-size: 28px;
     font-weight: 400;
     line-height: 36px;
@@ -44,7 +39,7 @@ body {
 }
 
 /* Normal Text Large - P */
-.text-large {
+.c-text-large {
     font-size: 24px;
     font-weight: 400;
     line-height: 38px;
@@ -52,7 +47,7 @@ body {
 }
 
 /* Normal Text Medium - P */
-.text-medium {
+.c-text-medium {
     font-size: 18px;
     font-weight: 400;
     line-height: 34px;
@@ -60,7 +55,7 @@ body {
 }
 
 /* Normal Text Small - P */
-.text-small {
+.c-text-small {
     font-size: 16px;
     font-weight: 400;
     line-height: 28px;
@@ -68,7 +63,7 @@ body {
 }
 
 /* Normal Text Extra Small - P */
-.text-extra-small {
+.c-text-extra-small {
     font-size: 14px;
     font-weight: 500;
     line-height: 22px;
@@ -76,15 +71,16 @@ body {
 }
 
 /* Normal Text Tinny - P */
-.text-tinny {
+.c-text-tinny {
     font-size: 12px;
     font-weight: 500;
     line-height: 18px;
     letter-spacing: 0.5px;
 }
 
+/* Bold Classes */
 /* Bold Title Large - H1 Bold */
-.title-large.bold {
+.c-title-large.bold {
     font-size: 64px;
     font-weight: 700;
     line-height: 66px;
@@ -92,7 +88,7 @@ body {
 }
 
 /* Bold Title Medium - H2 Bold */
-.title-medium.bold {
+.c-title-medium.bold {
     font-size: 48px;
     font-weight: 700;
     line-height: 5px;
@@ -100,7 +96,7 @@ body {
 }
 
 /* Bold Title Small - H3 Bold */
-.title-small.bold {
+.c-title-small.bold {
     font-size: 32px;
     font-weight: 700;
     line-height: 36px;
@@ -108,7 +104,7 @@ body {
 }
 
 /* Bold Title Extra Small - H4 Bold */
-.title-extra-small.bold {
+.c-title-extra-small.bold {
     font-size: 28px;
     font-weight: 700;
     line-height: 36px;
@@ -116,7 +112,7 @@ body {
 }
 
 /* Bold Normal Text Large - P Bold */
-.text-large.bold {
+.c-text-large.bold {
     font-size: 24px;
     font-weight: 700;
     line-height: 38px;
@@ -124,7 +120,7 @@ body {
 }
 
 /* Bold Normal Text Medium - P Bold */
-.text-medium.bold {
+.c-text-medium.bold {
     font-size: 18px;
     font-weight: 700;
     line-height: 34px;
@@ -132,7 +128,7 @@ body {
 }
 
 /* Bold Normal Text Small - P Bold */
-.text-small.bold {
+.c-text-small.bold {
     font-size: 16px;
     font-weight: 700;
     line-height: 28px;
@@ -140,7 +136,7 @@ body {
 }
 
 /* Bold Normal Text Extra Small - P Bold */
-.text-extra-small.bold {
+.c-text-extra-small.bold {
     font-size: 14px;
     font-weight: 700;
     line-height: 22px;
@@ -148,18 +144,16 @@ body {
 }
 
 /* Bold Normal Text Tinny - P Bold */
-.text-tinny.bold {
+.c-text-tinny.bold {
     font-size: 12px;
     font-weight: 700;
     line-height: 18px;
     letter-spacing: 0.74px;
 }
 
-
 /* MOBILE TYPOGRAPHY */
-
 /* H1 Title - Mobile */
-.title-large.mobile{
+.c-title-large.mobile {
     font-size: 32px;
     font-weight: 400;
     line-height: 36px;
@@ -167,7 +161,7 @@ body {
 }
 
 /* H2 Title - Mobile */
-.title-medium.mobile{
+.c-title-medium.mobile {
     font-size: 32px;
     font-weight: 400;
     line-height: 36px;
@@ -175,33 +169,31 @@ body {
 }
 
 /* H3 Title - Mobile */
-.title-small.mobile{
+.c-title-small.mobile {
     font-size: 24px;
     font-weight: 400;
     line-height: 32px;
-    letter-spacing: 1px
+    letter-spacing: 1px;
 }
 
 /* H4 Title - Mobile */
-.title-extra-small.mobile{
+.c-title-extra-small.mobile {
     font-size: 22px;
     font-weight: 400;
     line-height: 34px;
     letter-spacing: 2px;
 }
 
-/* P Normal Text Large- Mobile */
-.text-large.mobile{
-    font-family: Inter;
+/* P Normal Text Large - Mobile */
+.c-text-large.mobile {
     font-size: 20px;
     font-weight: 400;
     line-height: 32px;
-    letter-spacing: 0.9999998807907104px;
-    text-align: left;
+    letter-spacing: 0.75px;
 }
 
 /* P Normal Text Medium - Mobile */
-.text-medium.mobile{
+.c-text-medium.mobile {
     font-size: 16px;
     font-weight: 400;
     line-height: 28px;
@@ -209,24 +201,25 @@ body {
 }
 
 /* P Normal Text Small - Mobile */
-.text-small.mobile{
+.c-text-small.mobile {
     font-size: 14px;
     font-weight: 400;
     line-height: 24px;
-    letter-spacing: 0.25px
+    letter-spacing: 0.25px;
 }
 
 /* P Normal Text Extra Small - Mobile */
 /* P Normal Text Tinny - Mobile */
-.text-extra-small.mobile, .text-tinny.mobile{
+.c-text-extra-small.mobile, .c-text-tinny.mobile {
     font-size: 12px;
     font-weight: 500;
     line-height: 22px;
     letter-spacing: 1px;
 }
 
+/* Bold Mobile Typography */
 /* Bold H1 Title - Mobile */
-.title-large.bold.mobile{
+.c-title-large.bold.mobile {
     font-size: 48px;
     font-weight: 700;
     line-height: 50px;
@@ -234,7 +227,7 @@ body {
 }
 
 /* Bold H2 Title - Mobile */
-.title-medium.bold.mobile{
+.c-title-medium.bold.mobile {
     font-size: 32px;
     font-weight: 700;
     line-height: 36px;
@@ -242,7 +235,7 @@ body {
 }
 
 /* Bold H3 Title - Mobile */
-.title-small.bold.mobile{
+.c-title-small.bold.mobile {
     font-size: 24px;
     font-weight: 700;
     line-height: 32px;
@@ -250,7 +243,7 @@ body {
 }
 
 /* Bold H4 Title - Mobile */
-.title-extra-small.bold.mobile{
+.c-title-extra-small.bold.mobile {
     font-size: 22px;
     font-weight: 700;
     line-height: 34px;
@@ -258,7 +251,7 @@ body {
 }
 
 /* Bold P Normal Text Large - Mobile */
-.text-large.bold.mobile{
+.c-text-large.bold.mobile {
     font-size: 20px;
     font-weight: 700;
     line-height: 32px;
@@ -266,7 +259,7 @@ body {
 }
 
 /* Bold P Normal Text Medium - Mobile */
-.text-medium.bold.mobile{
+.c-text-medium.bold.mobile {
     font-size: 16px;
     font-weight: 700;
     line-height: 28px;
@@ -274,16 +267,16 @@ body {
 }
 
 /* Bold P Normal Text Small - Mobile */
-.text-small.bold.mobile{
+.c-text-small.bold.mobile {
     font-size: 14px;
     font-weight: 700;
     line-height: 24px;
     letter-spacing: 0.25px;
 }
 
-/* Bold P Normal Text Extra Small - Mobile */ 
+/* Bold P Normal Text Extra Small - Mobile */
 /* Bold P Normal Text Tinny - Mobile */
-.text-extra-small.bold.mobile, .text-tinny.bold.mobile{
+.c-text-extra-small.bold.mobile, .c-text-tinny.bold.mobile {
     font-size: 12px;
     font-weight: 700;
     line-height: 22px;

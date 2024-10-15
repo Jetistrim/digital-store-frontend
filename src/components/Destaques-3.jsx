@@ -27,16 +27,11 @@ const Highlights3WrapperContainer = styled.div`
         justify-content: space-between;
         align-items: center;
 
-        & .colecoes-dest{
-            color: var(--dark-gray-2)
-        }
-
         & a{
             height: 24px;
             display: flex;
             justify-content: space-between;
             text-decoration: none;
-            color: var(--primary);
             gap: 8px;
 
             @media (min-width: 768px) {
@@ -90,7 +85,6 @@ const Highlights3WrapperContainer = styled.div`
                 position: relative;
                 height: 179px;
                 width: 100%;
-                background-color: var(--white);
                 text-decoration: none;
 
                 @media (min-width: 768px) {
@@ -105,7 +99,6 @@ const Highlights3WrapperContainer = styled.div`
                     width: 88px;
                     height: 32px;
                     border-radius: 29px;
-                    color: var(--dark-gray-2);
                     padding: 4px 11px;
                     background-color: #E7FF86;
                     left: 13px;
@@ -128,13 +121,11 @@ const Highlights3WrapperContainer = styled.div`
                 align-items: left;
 
                 & .prod-type{
-                    color: var(--light-gray);
                     width: fit-content;
                     text-decoration: none;
                 }
 
                 & .prod-name{
-                    color: var(--dark-gray-2);
                     width: 149px;
                     white-space: nowrap;
                     overflow: hidden;
@@ -153,12 +144,7 @@ const Highlights3WrapperContainer = styled.div`
                     text-decoration: none;
 
                     & .origin-price{
-                        color: var(--light-gray);
                         text-decoration: line-through;
-                    }
-
-                    & .now-price{
-                        color: var(--dark-gray)
                     }
                 }
             }
@@ -184,21 +170,21 @@ const Card = () => {
     return (
         data ? (
             <div className="card">
-                <Link to="/produtos" className="img-disc">
-                    {data[0].sapato_discount > 0 && <div className="discount">
-                        <p className="percentage text-tinny bold">{data[0].sapato_discount}%</p>
-                        <p className="text-tinny bold">OFF</p>
+                <Link to="/produtos" className="img-disc bg-white">
+                    {data[0].sapato_discount > 0 && <div className="discount text-dark-gray-2">
+                        <p className="percentage c-text-tinny bold">{data[0].sapato_discount}%</p>
+                        <p className="c-text-tinny bold">OFF</p>
                     </div>}
 
                     <img src={data[0].sapato_image} />
                 </Link>
 
                 <div className="texts">
-                    <Link to="/produtos" className="prod-type text-tinny bold">{data[0].sapato_type}</Link>
-                    <Link to="/produtos" className={`prod-name ${window.innerWidth >= 768 ? 'text-large' : 'text-extra-small'} `}>{data[0].sapato_name}</Link>
+                    <Link to="/produtos" className="prod-type c-text-tinny bold text-light-gray">{data[0].sapato_type}</Link>
+                    <Link to="/produtos" className={`prod-name text-dark-gray-2 ${window.innerWidth >= 768 ? 'c-text-large' : 'c-text-extra-small'} `}>{data[0].sapato_name}</Link>
                     <Link to="/produtos" className="prices">
-                        <p className={`origin-price ${window.innerWidth >= 768 ? 'text-large' : 'text-extra-small'} `}>${data[0].sapato_value}</p>
-                        <p className={`now-price ${window.innerWidth >= 768 ? 'text-large' : 'text-extra-small'} bold`}>${(data[0].sapato_value * data[0].sapato_discount) / 100}</p>
+                        <p className={`origin-price text-light-gray ${window.innerWidth >= 768 ? 'c-text-large' : 'c-text-extra-small'} `}>${data[0].sapato_value}</p>
+                        <p className={`now-price text-dark-gray ${window.innerWidth >= 768 ? 'c-text-large' : 'c-text-extra-small'} bold`}>${(data[0].sapato_value * data[0].sapato_discount) / 100}</p>
                     </Link>
                 </div>
             </div>
@@ -213,8 +199,8 @@ const Destaques3 = () => {
     return (
         <Highlights3WrapperContainer>
             <div className="colecoes">
-                <h3 className={`colecoes-dest bold ${window.innerWidth >= 768 ? "text-large" : "text-small"}`}>Produtos em alta</h3>
-                <Link to="/produtos" className={ window.innerWidth >= 768 ? "text-medium" : "text-extra-small"}>
+                <h3 className={`text-dark-gray-2 bold ${window.innerWidth >= 768 ? "c-text-large" : "c-text-small"}`}>Produtos em alta</h3>
+                <Link to="/produtos" className={`text-primary-1 ${window.innerWidth >= 768 ? "c-text-medium" : "c-text-extra-small"}`}>
                     <p className="writed">Ver todos</p>
                     <p className="pi-arrow-right"></p>
                 </Link>

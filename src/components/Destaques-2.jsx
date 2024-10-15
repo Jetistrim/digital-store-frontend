@@ -20,7 +20,6 @@ const Highlights2WrapperContainer = styled.div`
     }
 
     & .colecoes {
-        color: var(--dark-gray-2);
         width: fit-content;
         margin-bottom: 20px;
         margin-left: 20px;
@@ -57,7 +56,6 @@ const Highlights2WrapperContainer = styled.div`
                 width: 100%;
                 height: 92px;
                 border-radius: 50%;
-                background-color: var(--white);
                 box-shadow: 0px 3.54px 22.12px 0px #0000000D;
 
                 @media (min-width: 768px) {
@@ -88,10 +86,6 @@ const Highlights2WrapperContainer = styled.div`
                     }
                 }
             }
-
-            & p {
-                color: var(--dark-gray-2);
-            }
         }
     }
 `
@@ -99,10 +93,10 @@ const Highlights2WrapperContainer = styled.div`
 const HighlightCard = (props) => {
     return (
         <div className="card">
-            <Link to="/produtos" className="image-wrapper">
+            <Link to="/produtos" className="image-wrapper bg-white">
                 <img src={`${props.img}`}/>
             </Link>
-            <p className={`text-extra-small bold ${window.innerWidth < 768 ? "mobile" : ""}`}>{props.title}</p>
+            <p className={`c-text-extra-small bold text-dark-gray-2 ${window.innerWidth < 768 ? "mobile" : ""}`}>{props.title}</p>
         </div>
     );
 };
@@ -116,7 +110,7 @@ const Destaques2 = () => {
 
     return (
         <Highlights2WrapperContainer>
-            <h3 className={`colecoes bold ${window.innerWidth >= 768 ? "text-large" : "text-small"}`}>Coleções em destaque</h3>
+            <h3 className={`colecoes text-dark-gray-2 bold ${window.innerWidth >= 768 ? "c-text-large" : "c-text-small"}`}>Coleções em destaque</h3>
             <div className="cards">
                 <HighlightCard img="Highlight-2-shirt.svg" title="Camisetas" />
                 <HighlightCard img="Highlight-2-pants.svg" title="Calças" />
