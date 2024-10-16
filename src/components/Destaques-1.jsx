@@ -10,172 +10,71 @@
 
 
 
-import PropTypes from "prop-types"
-import styled from "styled-components";
-import { default as But } from "./buttons/Buttons";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { useEffect, useState } from "react";
 
-const Highlights1WrapperContainer = styled.div`
-* {
-    margin: 0;
-}
-
-    display: flex;
-    flex-direction: column;
-    margin: 42px 0px 40px;
-    gap: 10px;
-    height: fit-content;
-
-    @media (min-width: 768px) {
-        margin: 38px 0 100px;
-        width: calc(100% - 13.88%);
-    }
-
-    & .cards-container{
-        display: grid;
-        grid-template-rows: repeat(auto-fit, 212px);
-        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-        gap: 10px;
-
-        @media (min-width: 768px) {
-            gap: 12px;
-            grid-template-rows: repeat(auto-fit, 251px);
-            grid-template-columns: repeat(3, minmax(320px, 1fr));
-        }
-
-        & .item{
-            background-color: #D8E3F2;
-            border-radius: 8px;
-            padding: 20px;
-            position: relative;
-
-            @media (min-width: 768px) {
-                padding: 35px 0 35px 30px;
-            }
-
-            & .texts{
-                display: flex;
-                text-align: left;
-                flex-direction: column;
-                
-                max-width: 194px;
-                gap: 10px;
-
-                @media (min-width: 768px) {
-                    gap: unset;
-
-                    & .keynote {
-                        margin-top: 10px;
-                        margin-bottom: 20px;
-                    }
-                }
-
-                & .discount{
-                background-color: #E7FF86;
-                width: 90px;
-                height: 32px;
-                border-radius: 29px;
-                display: flex;
-                padding-inline: 12.27px;
-                justify-content: space-between;
-                align-items: center;
-                z-index: 1;
-                }
-
-                & h3{
-                    height: 72px;
-                    z-index: 1;
-                }
-
-                & button {
-                    width: 144px;
-                    height: 48px;
-                    z-index: 1;
-                }
-            }
-
-            & .image {
-                position: absolute;
-                width: max-content;
-                display: flex;
-                justify-content: end;
-                height: 100%;
-                width: 190px;
-                right: 0;
-                top: 0;
-                z-index: 0;
-
-                @media (min-width: 768px) {
-                    width: 242px;
-                }
-
-                & img {
-                    height: 100%;
-                    object-fit: cover;
-                    object-position: center;
-                }
-            }
-        }
-    }
-`
-const HighlightCard = (props) => {
+const HighlightCard = ({ className = "", discount, img, title }) => {
     return (
-        <div className={`item ${props.className || ""}`}>
-            <div className="texts">
-                <div className="discount">
-                    <p className="text-dark-gray-2 percentage text-extra-small bold">{props.discount}</p>
-                    <p className="text-dark-gray-2 text-extra-small bold">OFF</p>
+        <div className={`bg-[#D8E3F2] rounded-lg p-5 md:p-9 relative ${className}`}>
+            <div className="flex flex-col text-left max-w-[194px] gap-2.5 md:gap-0">
+                <div className="bg-[#E7FF86] w-[90px] h-8 rounded-full flex px-3 justify-between items-center z-10">
+                    <p className="c-text-extra-small bold text-dark-gray-2">{discount}</p>
+                    <p className="c-text-extra-small bold text-dark-gray-2">OFF</p>
                 </div>
-                <h3 className="text-dark-gray keynote c-title-extra-small bold">
-                    {props.title}
+                <h3 className="c-title-extra-small bold text-dark-gray h-[72px] z-10 md:mt-2.5 md:mb-5">
+                    {title}
                 </h3>
                 <Link to="/produtos">
-                    <But buttonType="secondary" label="Comprar" className="c-text-small bold" />
+                    <button className="w-36 h-12 z-10 bg-primary-1 text-white rounded-lg c-text-small bold">
+                        Comprar
+                    </button>
                 </Link>
             </div>
-            <div className="image">
-                <img src={props.img} />
+            <div className="absolute flex justify-end h-full w-[190px] md:w-[242px] right-0 top-0 z-0">
+                <img src={img} className="h-full object-cover object-center" alt={title} />
             </div>
         </div>
-    )
-}
+    );
+};
 
-HighlightCard.propTypes = {
-    className: PropTypes.string,
-    discount: PropTypes.string,
-    img: PropTypes.string,
-    title: PropTypes.string
-}
-
-const Destaques1 = () => {
-
-    const [data, setData] = useState()
+export default function Destaques1() {
+    const [data, setData] = useState();
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await axios.get('http://localhost:3000/sapatos')
-            setData(response.data)
-        }
-        fetchData()
-    }, [])
+            const response = await axios.get('http://localhost:3000/sapatos');
+            setData(response.data);
+        };
+        fetchData();
+    }, []);
 
-    console.log(data);
+    if (!data || data.length === 0) {
+        return <p className="text-black">Loading...</p>;
+    }
 
-    return !data || data.length === 0 ?
-        (
-            <p className="text-black">Loading...</p>
-        ) : (
-            <Highlights1WrapperContainer>
-                <h3 className={`text-dark-gray-2 self-start ${window.innerWidth >= 768 ? "text-large" : "text-small"} bold`}>Coleções em Destaque</h3>
-                <div className="cards-container">
-                    <HighlightCard img="Highlight-shirt.svg" title="New drop Supreme" discount={(data[0].sapato_discount/100).toLocaleString("pt-BR", { style: 'percent'})} />
-                    <HighlightCard img="Highlight-shoe.svg" title="Adidas Colection" discount={(data[0].sapato_discount/100).toLocaleString("pt-BR", { style: 'percent'})} />
-                    <HighlightCard img="Highlight-headphone.svg" title="New Beats Bass" discount={(data[0].sapato_discount/100).toLocaleString("pt-BR", { style: 'percent'})} />
-                </div>
-            </Highlights1WrapperContainer>
-        )
+    return (
+        <div className="flex flex-col my-10 md:my-[38px_0_100px] gap-2.5 h-fit w-full p-[100px] md:w-[86.12%]">
+            <h3 className={`text-dark-gray-2 self-start ${window.innerWidth >= 768 ? "c-text-large" : "c-text-small"} bold`}>
+                Coleções em Destaque
+            </h3>
+            <div className="grid grid-rows-[repeat(auto-fit,212px)] md:grid-rows-[repeat(auto-fit,251px)] grid-cols-[repeat(auto-fit, 320px)] md:grid-cols-3 gap-2.5 md:gap-3">
+                <HighlightCard
+                    img="Highlight-shirt.svg"
+                    title="New drop Supreme"
+                    discount={(data[0].sapato_discount / 100).toLocaleString("pt-BR", { style: 'percent' })}
+                />
+                <HighlightCard
+                    img="Highlight-shoe.svg"
+                    title="Adidas Colection"
+                    discount={(data[0].sapato_discount / 100).toLocaleString("pt-BR", { style: 'percent' })}
+                />
+                <HighlightCard
+                    img="Highlight-headphone.svg"
+                    title="New Beats Bass"
+                    discount={(data[0].sapato_discount / 100).toLocaleString("pt-BR", { style: 'percent' })}
+                />
+            </div>
+        </div>
+    );
 }
-
-export default Destaques1;

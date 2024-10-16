@@ -7,13 +7,13 @@ import OfertaEspecial from "../components/OfertaEspecial";
 
 const Home = () => {
     return (
-        <>
+        <div className="flex flex-col items-center">
             <Banners />
             <Destaques1 />
             <Destaques2 />
             <Destaques3 />
             <OfertaEspecial />
-        </>
+        </div>
     );
 }
 
