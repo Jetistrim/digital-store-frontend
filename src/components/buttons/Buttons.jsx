@@ -1,45 +1,60 @@
-import { Button as ShadcnButton } from "@/components/ui/button"
+import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { PlusIcon } from "lucide-react"
 
 export default function CustomButton({
   buttonType,
   label,
-  className,
+  className = "",
   iconPosition = "left",
   children,
   ...props
 }) {
-  const baseStyles = "h-10 w-[158px] rounded-[10px] text-light-gray-3 border-transparent"
+  const addPrefixToClassName = (className) => {
+    if (!className) return "";
+    const elements = className.split(' ');
+    const prefixedElements = elements.map(element => `[&&]:!${element}`);
+    return prefixedElements.join(' ');
+  };
+
+  const baseStyles = "h-10 w-[158px] rounded-[10px] border-transparent";
 
   const buttonStyles = {
-    primary: "bg-primary-1 hover:bg-tertiary disabled:bg-light-gray-2",
-    secondary: "bg-light-gray-3 text-primary-1 hover:bg-secondary-1 hover:text-[#f7f7fc] disabled:border disabled:border-primary-1 disabled:opacity-50",
-    icon: "bg-primary-1 hover:bg-tertiary disabled:bg-light-gray-2",
-    shop: "bg-warning hover:bg-warning-hover disabled:bg-light-gray-2"
-  }
+    primary: "bg-primary-1 text-light-gray-3 hover:bg-tertiary disabled:bg-light-gray-2",
+    secondary: "bg-light-gray-3 text-primary-1 hover:bg-secondary hover:text-[#f7f7fc] disabled:border disabled:border-primary-1 disabled:opacity-50",
+    icon: "bg-primary-1 text-light-gray-3 hover:bg-tertiary disabled:bg-light-gray-2",
+    shop: "bg-[#ffb31f] text-light-gray-3 hover:bg-[#cf8900] disabled:bg-light-gray-2",
+  };
 
-  const iconElement = buttonType === "icon" ? <PlusIcon className="h-4 w-4" /> : null
+  const iconElement = buttonType === "icon" ? <PlusIcon className="h-4 w-4" /> : null;
 
   const content = (
     <>
       {iconPosition === "left" && iconElement}
-      {label || children}
+      {label ? label : children}
       {iconPosition === "right" && iconElement}
     </>
-  )
+  );
+
+  const getVariant = () => {
+    switch (buttonType) {
+      case 'secondary':
+        return 'outline';
+      case 'icon':
+        return 'default';
+      default:
+        return buttonType;
+    }
+  };
 
   return (
-    (<ShadcnButton
-      className={cn(
-        baseStyles,
-        buttonStyles[buttonType],
-        "inline-flex items-center justify-center",
-        className
-      )}
+    <Button
+      variant={getVariant()}
+      className={cn(baseStyles, buttonStyles[buttonType], addPrefixToClassName(className))}
       disabled={props.disabled}
-      {...props}>
+      {...props}
+    >
       {content}
-    </ShadcnButton>)
+    </Button>
   );
 }
