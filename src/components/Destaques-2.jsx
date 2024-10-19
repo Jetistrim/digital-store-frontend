@@ -1,125 +1,33 @@
-import PropTypes from "prop-types"
 import { Link } from "react-router-dom";
-import styled from "styled-components";
 
-
-const Highlights2WrapperContainer = styled.div`
-    & * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-
-    @media (min-width: 768px) {
-        align-items: center;
-        width: fit-content;
-    }
-
-    & .colecoes {
-        width: fit-content;
-        margin-bottom: 20px;
-        margin-left: 20px;
-
-        @media (min-width: 768px) {
-            margin-left: 0;
-        }
-    }
-
-    & .cards{
-        display: grid;
-        grid-template-columns: repeat(5, minmax(92px, 1fr));
-        grid-template-rows: repeat(1, minmax(125px, 1fr));
-        overflow-x: scroll;
-        gap: 19px;
-
-        @media (min-width: 768px) {
-            gap: 48px;
-            width: 712px;
-            height: 138px;
-            overflow: hidden;
-        }
-
-        & .card {
-            display: flex;
-            align-items: center;
-            flex-direction: column;
-            justify-content: space-between;
-
-            & .image-wrapper {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                width: 100%;
-                height: 92px;
-                border-radius: 50%;
-                box-shadow: 0px 3.54px 22.12px 0px #0000000D;
-
-                @media (min-width: 768px) {
-                    height: 104px;
-                }
-
-                & img {
-                    width: 57px;
-                    object-fit: cover;
-                    transition: filter ease 300ms;
-
-                    @media (min-width: 768px) {
-                        width: 64px;
-                    }
-
-                    &:hover {
-                        & img {
-                            filter: invert(25%) sepia(62%) saturate(2337%) hue-rotate(305deg) brightness(91%) contrast(106%);
-                            transition: filter ease 300ms;
-                        }
-                    }
-                }
-
-                &:hover {
-                    & img {
-                        filter: invert(25%) sepia(62%) saturate(2337%) hue-rotate(305deg) brightness(91%) contrast(106%);
-                        transition: filter ease 300ms;
-                    }
-                }
-            }
-        }
-    }
-`
-
-const HighlightCard = (props) => {
+const HighlightCard = ({ img, title }) => {
     return (
-        <div className="card">
-            <Link to="/produtos" className="image-wrapper bg-white">
-                <img src={`${props.img}`}/>
-            </Link>
-            <p className={`c-text-extra-small bold text-dark-gray-2 ${window.innerWidth < 768 ? "mobile" : ""}`}>{props.title}</p>
-        </div>
+        <Link className="flex flex-col items-center justify-between">
+            <div to="/produtos" className="w-full h-[92px] md:h-[104px] bg-white rounded-full flex justify-center items-center shadow-[0px_3.54px_22.12px_0px_rgba(0,0,0,0.05)] mb-2">
+                <img
+                    src={img}
+                    className="w-[57px] md:w-16 object-cover transition-all duration-300 ease-in-out hover:filter hover:invert-[25%] hover:sepia-[62%] hover:saturate-[2337%] hover:hue-rotate-[305deg] hover:brightness-[91%] hover:contrast-[106%]"
+                    alt={title}
+                />
+            </div>
+            <p className={`c-text-extra-small bold text-dark-gray-2 ${window.innerWidth < 768 ? "mobile" : ""}`}>{title}</p>
+        </Link>
     );
 };
 
-HighlightCard.propTypes = {
-    img: PropTypes.string,
-    title: PropTypes.string
-}
-
-const Destaques2 = () => {
-
+export default function Destaques2() {
     return (
-        <Highlights2WrapperContainer>
-            <h3 className={`colecoes text-dark-gray-2 bold ${window.innerWidth >= 768 ? "c-text-large" : "c-text-small"}`}>Coleções em destaque</h3>
-            <div className="cards">
+        <div className="flex flex-col w-full md:w-fit md:items-center">
+            <h3 className={`text-dark-gray-2 bold mb-5 ml-5 md:ml-0 ${window.innerWidth >= 768 ? "c-text-large" : "c-text-small"}`}>
+                Coleções em destaque
+            </h3>
+            <div className="!grid grid-flow-col auto-cols-[minmax(92px,1fr)] md:grid-cols-5 gap-[19px] md:gap-12 overflow-x-auto md:overflow-visible md:w-[712px] md:h-[138px]">
                 <HighlightCard img="Highlight-2-shirt.svg" title="Camisetas" />
                 <HighlightCard img="Highlight-2-pants.svg" title="Calças" />
                 <HighlightCard img="Highlight-2-pants.svg" title="Bonés" />
                 <HighlightCard img="Highlight-2-headphones.svg" title="Headphones" />
                 <HighlightCard img="Highlight-2-shoe.svg" title="Tênis" />
             </div>
-        </Highlights2WrapperContainer>
+        </div>
     );
 }
-
-export default Destaques2;
