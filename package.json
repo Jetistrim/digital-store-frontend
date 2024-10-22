@@ -23,6 +23,8 @@
     "boxicons": "^2.1.4",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "embla-carousel-autoplay": "^8.3.0",
+    "embla-carousel-react": "^8.3.0",
     "json-server": "^1.0.0-beta.1",
     "lucide-react": "^0.452.0",
     "primeflex": "^3.3.1",
