@@ -8,11 +8,11 @@ import OfertaEspecial from "../components/OfertaEspecial";
 const Home = () => {
     return (
         <div className="flex flex-col items-center">
-            <Banners />
+            {/* <Banners /> */}
             <Destaques1 />
             <Destaques2 />
             <Destaques3 />
-            <OfertaEspecial />
+            {/* <OfertaEspecial /> */}
         </div>
     );
 }
