@@ -1,5 +1,5 @@
 // import OfertaEspecial from "../components/OfertaEspecial";
-import {CarouselDemo as Banners} from "../components/Banner"
+import { default as Banners } from "../components/Banner"
 import Destaques1 from "../components/Destaques-1";
 import Destaques2 from "../components/Destaques-2";
 import Destaques3 from "../components/Destaques-3";
