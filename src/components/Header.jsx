@@ -50,7 +50,7 @@ const HeaderContainer = styled.header`
             max-width: 100%;
         }
         
-        .carrinho, .out-search, nav.links, .fundo, #menu-sidebar, #menu-sidebar + label, .digital-logo, .search-buy, .carrin{
+        .carrinho, .out-search, .links, .fundo, #menu-sidebar, #menu-sidebar + label, .digital-logo, .search-buy, .carrin{
             z-index: 4;
         }
 
@@ -149,7 +149,6 @@ const HeaderContainer = styled.header`
         }
             
         & .links{
-            z-index: 3;
             display: flex;
             flex-direction: column;
             position: fixed;
@@ -174,7 +173,6 @@ const HeaderContainer = styled.header`
                     width: fit-content;
     
                     &.active {
-                        color: var(--primary);
                     }
     
                     &:not(.active)::after {
@@ -194,8 +192,7 @@ const HeaderContainer = styled.header`
                         border-radius: 2px;
                         width: 100%;
                         height: 2px;
-                        margin-block-start: 5px;
-                        background-color: var(--primary);
+                        margin-top: 5px;
                         transition-duration: 500ms;
                     }
                 }
@@ -310,7 +307,6 @@ const HeaderContainer = styled.header`
                 line-height: 24px;
                 font-weight: 600;
                 letter-spacing: -0.01rem;
-                color: var(--primary);
     
                 @media (min-width: 768px) {
                     font-size: 36px;
@@ -598,9 +594,9 @@ const HeaderContainer = styled.header`
 
 const DigitalLogo = () => {
     return (
-        <div className="digital-logo">
-            <img src="Group.svg" />
-            <h1>Digital Store</h1>
+        <div className="flex items-center justify-between w-[138px] h-[24px] ml-[70px] md:h-[44px] md:w-[253px] md:m-0 z-[4] ">
+            <img src="Group.svg" className="mt-[2.73px] mb-[3.27px] w-[18px] h-[18px] md:ml-auto md:w-[33px] md:h-[33px] md:mt-[5px] md:mb-[6px] " />
+            <h1 className="text-primary-1 m-0 w-auto font-sans font-[600] text-[19.85px] leading-[24px] tracking-[-0.01rem] ">Digital Store</h1>
         </div>
     );
 }
@@ -608,12 +604,12 @@ const DigitalLogo = () => {
 const Usuario = () => {
     return (
         <>
-            <div className="cadastre text-dark-gray-2">
-                <Link className="c-text-small" to="/cadastro" >Cadastre-se</Link>
+            <div className="hidden text-dark-gray-2">
+                <Link className="c-text-small ml-[10px] md:inline " to="/cadastro" >Cadastre-se</Link>
             </div>
-            <div className="login">
-                <Link to="/login" >
-                    <But className="c-text-extra-small bold" buttonType="primary" label="Entrar" />
+            <div className="hidden md:inline mr-[max(0,calc(100%-50px))] ">
+                <Link className="w-fit mr-[50px] " to="/login" >
+                    <But className="c-text-extra-small bold w-[114px] " buttonType="primary" label="Entrar" />
                 </Link>
             </div>
         </>
@@ -622,11 +618,11 @@ const Usuario = () => {
 
 const Links = () => {
     return (
-        <div className="links bg-white">
+        <div className="links bg-white z-[4] flex flex-col fixed top-[66.5px] left-0 h-[calc(100vh-66.5px)] w-[308px] p-[30px] shadow-[3px_2px_5px_rgba(0,0,0,0.1)] transition-[all_500ms]  ">
             <p className="c-text-small bold m-0 text-dark-gray-2">Páginas</p>
 
-            <nav>
-                <NavLink to="/" className={(a) => `${whereNavLink(a)} c-text-small text-dark-gray-3`} >Home</NavLink>
+            <nav className="flex flex-col gap-[10px] mt-[20px] ">
+                <NavLink to="/" className={(a) => `${whereNavLink(a)} c-text-small text-dark-gray-3 `} >Home</NavLink>
                 <NavLink to="/produtos" className={(a) => `${whereNavLink(a)} c-text-small text-dark-gray-3`} >Produtos</NavLink>
                 <NavLink to="/categorias" className={(a) => `${whereNavLink(a)} c-text-small text-dark-gray-3`} >Categorias</NavLink>
                 <NavLink to="/meu-perfil" className={(a) => `${whereNavLink(a)} c-text-small text-dark-gray-3`} >Meus Pedidos</NavLink>

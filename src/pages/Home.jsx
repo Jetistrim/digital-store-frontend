@@ -9,10 +9,10 @@ const Home = () => {
     return (
         <div className="flex flex-col items-center w-full">
             <Banners />
-            {/* <Destaques1 /> */}
-            {/* <Destaques2 /> */}
-            {/* <Destaques3 /> */}
-            {/* <OfertaEspecial /> */}
+            <Destaques1 />
+            <Destaques2 />
+            <Destaques3 />
+            <OfertaEspecial />
         </div>
     );
 }
