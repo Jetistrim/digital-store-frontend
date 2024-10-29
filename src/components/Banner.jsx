@@ -6,6 +6,7 @@ import {
 } from "@/components/ui/carousel"
 import { default as But } from './buttons/Buttons'
 import Autoplay from "embla-carousel-autoplay"
+import { useEffect, useState } from "react"
 
 
 const Banner = (props) => {
@@ -25,40 +26,61 @@ const Banner = (props) => {
 }
 
 export default function CarouselDemo() {
+    const [api, setApi] = useState()
+    const [current, setCurrent] = useState(0)
+
+    useEffect(() => {
+        if (!api) {
+            return
+        }
+
+        setCurrent(api.selectedScrollSnap())
+
+        api.on("select", () => {
+            setCurrent(api.selectedScrollSnap())
+        })
+    }, [api])
+
+    const handleDotClick = (index) => {
+        if (api) {
+            api.scrollTo(index)
+        }
+    }
+
     return (
-        <Carousel plugins={[
-            // Autoplay({
-            //     delay: 3000,
-            //     stopOnInteraction: false,
-            // })
-        ]} className="w-[375px] h-[662px] md:w-full md:h-[681px] ">
-            <CarouselContent>
-                {Array.from({ length: 5 }).map((_, index) => (
-                    <CarouselItem key={index} className={" "}>
-                        <div className=" ">
+        <>
+            <Carousel
+                setApi={setApi}
+                plugins={[
+                    Autoplay({
+                        delay: 3000,
+                        stopOnInteraction: false,
+                    })
+                ]}
+                className="w-[375px] h-[662px] md:w-full md:h-[681px]"
+            >
+                <CarouselContent>
+                    {Array.from({ length: 5 }).map((_, index) => (
+                        <CarouselItem key={index}>
                             <Card className="bg-light-gray-3 border-none">
-                                <CardContent className="flex h-[662px] md:h-[681px] justify-center p-0 ">
-                                    <Banner textinho="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam earum est quidem quasi magnam" ></Banner>
+                                <CardContent className="flex h-[662px] md:h-[681px] justify-center p-0">
+                                    <Banner textinho={`Lorem ipsum dolor sit amet consectetur adipisicing elit. Banner ${index + 1}`} />
                                 </CardContent>
                             </Card>
-                        </div>
-                    </CarouselItem>
+                        </CarouselItem>
+                    ))}
+                </CarouselContent>
+            </Carousel>
+            <ul className="flex gap-[10px] justify-center mt-4">
+                {Array.from({ length: 5 }).map((_, index) => (
+                    <li
+                        key={index}
+                        onClick={() => handleDotClick(index)}
+                        className={`h-[12px] w-[12px] rounded-lg duration-300 cursor-pointer ${index === current ? 'bg-primary-1' : 'bg-light-gray-2'
+                            }`}
+                    />
                 ))}
-            </CarouselContent>
-            {/* <CarouselPrevious className="w-1 bg-primary-1 absolute left-[6px]" />
-            <CarouselNext className="w-1 bg-primary-1 absolute right-[6px]" /> */}
-        </Carousel>
+            </ul>
+        </>
     )
 }
-
-
-
-
-
-
-
-
-
-
-
-
