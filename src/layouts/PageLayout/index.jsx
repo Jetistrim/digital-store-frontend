@@ -6,10 +6,10 @@ const PageLayout = () => {
     return (    
         <>
             <Header />
-            <div className="w-full flex flex-column items-center">
+            {/* <div className="w-full flex flex-column items-center">
                 <Outlet />
             </div>
-            <Footer />
+            <Footer /> */}
         </>
     );
 }

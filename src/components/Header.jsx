@@ -12,6 +12,7 @@
 import styled from "styled-components";
 import { default as But } from './buttons/Buttons';
 import { Link, NavLink } from "react-router-dom";
+import { useState } from "react";
 
 const HeaderContainer = styled.header`
 :root{
@@ -147,57 +148,8 @@ const HeaderContainer = styled.header`
             transform: translateX(0);
             opacity: 1;
         }
-            
-        & .links{
-            display: flex;
-            flex-direction: column;
-            position: fixed;
-            top: 66.5px;
-            left: 0px;
-            height: calc(100vh - 66.5px);
-            width: 308px;
-            padding: 30px;
-            box-shadow: 3px 2px 5px rgba(0, 0, 0, 0.1);
-            transition: all 500ms;
-            transform: translateX(-100%);
-            opacity: 0;
-
-            & nav {
-                display: flex;
-                flex-direction: column;
-                gap: 10px;
-                margin-top: 20px;
-
-                & a {
-                    text-decoration: none;
-                    width: fit-content;
     
-                    &.active {
-                    }
-    
-                    &:not(.active)::after {
-                        content: "";
-                        display: block;
-                        border-radius: 2px;
-                        width: 0%;
-                        height: 2px;
-                        margin-top: 5px;
-                        background-color: transparent;
-                        transition-duration: 500ms;
-                    }
-    
-                    &.active::after {
-                        content: "";
-                        display: block;
-                        border-radius: 2px;
-                        width: 100%;
-                        height: 2px;
-                        margin-top: 5px;
-                        transition-duration: 500ms;
-                    }
-                }
-            }
-    
+        & .links {
 
             &::after{
                 content: "";
@@ -604,45 +556,50 @@ const DigitalLogo = () => {
 const Usuario = () => {
     return (
         <>
-            <div className="hidden text-dark-gray-2">
-                <Link className="c-text-small ml-[10px] md:inline " to="/cadastro" >Cadastre-se</Link>
+            <div className="cadastre order-2 w-full text-center">
+                <Link to="/cadastro" className="c-text-small text-dark-gray-2">
+                    Cadastre-se
+                </Link>
             </div>
-            <div className="hidden md:inline mr-[max(0,calc(100%-50px))] ">
-                <Link className="w-fit mr-[50px] " to="/login" >
-                    <But className="c-text-extra-small bold w-[114px] " buttonType="primary" label="Entrar" />
+
+            {/* Link para Login */}
+            <div className="login w-full text-center">
+                <Link to="/login" className="w-full">
+                    <But className="c-text-extra-small font-bold w-full bg-primary-1 text-white py-2 rounded-md">
+                        Entrar
+                    </But>
                 </Link>
             </div>
         </>
     )
 }
 
-const Links = () => {
+const Links = ({menuOpen}) => { 
+    
     return (
-        <div className="links bg-white z-[4] flex flex-col fixed top-[66.5px] left-0 h-[calc(100vh-66.5px)] w-[308px] p-[30px] shadow-[3px_2px_5px_rgba(0,0,0,0.1)] transition-[all_500ms]  ">
-            <p className="c-text-small bold m-0 text-dark-gray-2">Páginas</p>
+        <div className={`bg-white z-[4] flex flex-col fixed top-[66.5px] left-0 h-[calc(100vh-66.5px)] w-[308px] p-[30px] shadow-[3px_2px_5px_rgba(0,0,0,0.1)] transition-all duration-500 transform ${menuOpen ? 'opacity-1' : 'translate-x-[-50%] opacity-0'} `} >
+            <p className="c-text-small font-bold m-0 text-dark-gray-2">Páginas</p>
 
-            <nav className="flex flex-col gap-[10px] mt-[20px] ">
-                <NavLink to="/" className={(a) => `${whereNavLink(a)} c-text-small text-dark-gray-3 `} >Home</NavLink>
-                <NavLink to="/produtos" className={(a) => `${whereNavLink(a)} c-text-small text-dark-gray-3`} >Produtos</NavLink>
-                <NavLink to="/categorias" className={(a) => `${whereNavLink(a)} c-text-small text-dark-gray-3`} >Categorias</NavLink>
-                <NavLink to="/meu-perfil" className={(a) => `${whereNavLink(a)} c-text-small text-dark-gray-3`} >Meus Pedidos</NavLink>
+            <nav className="flex flex-col gap-[10px] mt-[20px]">
+                <NavLink to="/" className={(a) => `${whereNavLink(a)} c-text-small bold relative`} >Home</NavLink>
+                <NavLink to="/produtos" className={(a) => `${whereNavLink(a)} c-text-small bold relative`} >Produtos</NavLink>
+                <NavLink to="/categorias" className={(a) => `${whereNavLink(a)} c-text-small bold relative`} >Categorias</NavLink>
+                <NavLink to="/meu-perfil" className={(a) => `${whereNavLink(a)} c-text-small bold relative`} >Meus Pedidos</NavLink>
             </nav>
-            <div className="but-link">
+
+            <div className="absolute bottom-[calc(30px+85px+20px)] left-[30px] right-[30px] h-[1px] bg-light-gray-2 md:hidden"></div>
+
+            <div className="but-link mt-auto flex flex-col items-center gap-[17px] md:hidden">
                 <Usuario />
             </div>
-
         </div>
     )
 }
 
-const whereNavLink = ({ isActive, isPending }) => {
-    if (isPending) {
-        return "pending"
-    } else if (isActive) {
-        return "active"
-    } else {
-        return ""
-    }
+const whereNavLink = ({ isActive }) => {
+    return isActive 
+    ? "text-primary-1 w-fit after:block after:content-[''] after:border after:rounded after:h-[2px] after:border-transparent after:w-full after:bg-primary-1 transition-all duration-[500ms] after:duration-[500ms]" 
+    : "text-dark-gray-3 after:block after:content-[''] after:border after:border-transparent after:bg-transparent after:rounded after:h-[2px] after:w-0 transition-all duration-500"
 };
 
 const Carrin = () => {
@@ -711,15 +668,22 @@ const Carrin = () => {
 
 const Header = () => {
 
+    // Verifica se a checkbox está selecionada ou não.
+    const [menuOpen, setMenuOpen] = useState(false);
+    const toggleMenu = () => {
+        setMenuOpen((menu) => !menu)
+    };
+
     return (
         <HeaderContainer>
             <div className="container bg-white">
                 <div className="top-side">
 
-                    <div className="fundo bg-white"></div>
+                    <div className="fundo bg-white" />
 
                     <label className="overlay" htmlFor="menu-sidebar"></label>
-                    <input type="checkbox" id="menu-sidebar" />
+                    <input type="checkbox" id="menu-sidebar" checked={menuOpen} onChange={toggleMenu} />
+
                     <label className="menu-button" htmlFor="menu-sidebar">
                         <img src="Menu.svg" />
                     </label>
@@ -742,8 +706,7 @@ const Header = () => {
 
                     <Carrin />
                 </div>
-
-                <Links />
+                <Links menuOpen={menuOpen} />
             </div>
         </HeaderContainer>
     );
