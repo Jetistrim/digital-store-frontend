@@ -9,707 +9,93 @@
 
 
 
-import styled from "styled-components";
-import { default as But } from './buttons/Buttons';
+
+
+
+
+
+
+
+
+
+
+
+import { MenuIcon, SearchIcon, ShoppingCartIcon } from "lucide-react"; // Exemplos de ícones
+import { useCallback, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { useState } from "react";
 
-const HeaderContainer = styled.header`
-:root{
-    --primary: #C92071;
-    --dark-gray-2: #474747;
-    --dark-gray-3: #666666;
-}
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    max-height: 192px;
-    width: 100%;
-    height: 66.5px;
-    margin: auto;
 
-    @media (min-width: 768px) {
-        height: 192px;
-    }
-
-    .container{
-        padding: 20px;
-        display: flex;
-        width: 100%;
-        height: fit-content;
-        flex-wrap: wrap;
-        position: fixed;
-        z-index: 10;
-
-        @media (min-width: 768px) {
-            padding: 45px 100px 29px 100px;
-            flex-direction: column;
-            justify-content: space-between;
-            height: 192px;
-            position: static;
-            max-width: 100%;
-        }
-        
-        .carrinho, .out-search, .links, .fundo, #menu-sidebar, #menu-sidebar + label, .digital-logo, .search-buy, .carrin{
-            z-index: 4;
-        }
-
-        & .top-side{
-            display: flex;
-            width: 100%;
-            justify-content: space-between;
-            align-items: center;
-
-            & > .cadastre{
-                display: none;
-                a {
-                    margin-left: 10px;
-                }
-                @media (min-width: 768px){
-                    display: inline;
-                }
-            }
-
-            & > .login {
-                display: none;
-
-                & a {
-                    width: fit-content;
-                    margin-right: 50px;
-
-                    button {
-                        width: 114px;
-                    }
-                }
-
-                @media (min-width: 768px) {
-                    display: inline;
-                    margin-right: max(0, calc(100% -50px));
-                }
-            }
-        }
-
-        .fundo{
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 66.5px;
-
-            @media (min-width: 768px) {
-                display: none;
-            }
-        }
-
-        .overlay{
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        z-index: 3;
-        background-color: rgba(31, 31, 31, 0.4);
-        opacity: 0;
-        visibility: hidden;
-        transition-duration: 500ms;
-        }
-
-        &:has(div #menu-sidebar:checked){
-            .overlay {
-                opacity: 1;
-                visibility: visible;
-            }
-        }
-
-        & #menu-sidebar {
-            display: none;
-            visibility: hidden;
-            width: 0;
-        }
-
-        & label.menu-button {
-            display: flex;
-            width: 24px;
-            height: 24px;
-
-            & img {
-                margin: 0;
-                width: 24px;
-                height: 24px;
-            }
-
-            @media (min-width: 768px) {
-                display: none;
-            }
-        }
-
-        &:has(#menu-sidebar:checked) .links{
-            transform: translateX(0);
-            opacity: 1;
-        }
-    
-        & .links {
-
-            &::after{
-                content: "";
-                width: calc(100% - 60px);
-                height: 1px;
-                background-color: var(--light-gray-2);
-                position: absolute;
-                bottom: calc(30px + 85px + 20px);
-            }
-
-            & .but-link{
-                margin-top: auto;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                gap: 17px;
-
-
-                & .login{
-                    width: 100%;
-
-                    & a{
-                        width: inherit;
-                        order: 1;
-                        & button {
-                            width: inherit;
-                        }
-                    } 
-                }
-
-                & .cadastre{
-                    & a{
-                        color: var(--dark-gray-2);
-                    }
-                    order: 2;
-                }
-            }
-
-            @media (min-width: 768px) {
-                z-index: 4;
-                flex-direction: row;
-                opacity: 1;
-                visibility: visible;
-                background-color: transparent;
-                box-shadow: none;
-                transform: none;
-                position: static;
-                height: auto;
-                padding: 0;
-                height: 29px;
-                width: 424px;
-                order: 4;
-
-                p {
-                    display: none;
-                }
-
-                nav {
-                    flex-direction: row;
-                    gap: 32px;
-                    align-items: center;
-                    height: 25px;
-                    margin: 0;
-
-                    & a {
-                        color: var(--dark-gray-3);
-                        text-decoration: none;
-                        line-height: 25px;
-                    }
-                }
-
-                &:after {
-                    display: none;
-                }
-
-                .but-link {
-                    display: none;
-                }
-            }
-        }
-
-        & .digital-logo {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 138px;
-            height: 24px;
-            margin-left: 70px;
-    
-            & img {
-                margin: 2.73px 0 3.27px 0;
-                width: 18px;
-                height: 18px;
-    
-                @media (min-width: 768px) {
-                    margin-left: auto;
-                    width: 33px;
-                    height: 33px;
-                    margin: 5px 0 6px 0;
-                }
-            }
-    
-            & h1 {
-                margin: 0;
-                width: auto;
-                font-size: 19.85px;
-                line-height: 24px;
-                font-weight: 600;
-                letter-spacing: -0.01rem;
-    
-                @media (min-width: 768px) {
-                    font-size: 36px;
-                    line-height: 44px;
-                }
-            }
-            @media (min-width: 768px) {
-                height: 44px;
-                width: 253px;
-                margin: 0;
-            }
-        }
-
-        & .out-search{
-            height: 20px;
-            width: 20px;
-            transition-duration: 500ms;
-            margin-left: 28px;
-
-            @media (min-width: 768px) {
-                display: none;
-            }
-
-            & img{
-                width: 20px;
-                height: 20px;
-            }
-        }
-
-        & #search-buy:checked + .out-search > img{
-            filter: invert(20%) sepia(62%) saturate(3928%) hue-rotate(315deg) brightness(85%) contrast(91%);
-        }
-
-        & #search-buy{
-            display: none;
-        }
-
-        & .search-buy {
-            display: flex;
-            position: absolute;
-            top: -13.5px;
-            left: 0;
-            width: 100vw;
-            height: 80px;
-            justify-content: space-between;
-            z-index: 1;
-            transition-duration: 300ms;
-            visibility: hidden;
-            transform: translateY(0);
-
-            & .MenuTopBarSearch{
-                display: flex;
-                align-items: center;
-                gap: 10px;
-                width: 100%;
-                background-color: var(--white);
-                justify-content: flex-end;
-                padding: 0 40px 20px 20px;
-                
-                & input{
-                    color: var(--dark-gray-3);
-                    width: 100%;
-                    height: 60px;
-                    padding: 16px 20px;
-                    border: 0;
-                    border-radius: 8px;
-                    background-color: rgba(71, 71, 71, 0.04);
-
-                    &::placeholder{
-                        color: var(--dark-gray-3);
-                    }
-
-                    &:focus{
-                        outline: none;
-                    }
-                }
-
-                & a{
-                    position: absolute;
-                    margin-right: 20px;
-                    height: 24px;
-                    cursor: pointer;
-                    justify-content: flex-end;
-
-                    & img{
-                        opacity: 0.5;
-                    }
-                }
-            }
-
-            @media (min-width: 768px) {
-                width: min(559px, 47%);
-                position: static;
-                visibility: visible;
-                height: fit-content;
-
-                & .MenuTopBarSearch{
-                    padding: 0;
-                    height: fit-content;
-                }
-            }
-            
-        }
-
-        & #search-buy:checked + * + .search-buy{
-            transform: translateY(80px);
-            visibility: visible;
-        }
-        
-
-        & .carrin{
-            position: relative;
-
-            .carrin-but{
-                position: relative;
-    
-                @media (min-width: 768px){
-                    
-                }
-    
-                & #carrinho {
-                    display: none;
-                }
-    
-                & label img{
-                    cursor: pointer;
-                }
-    
-                & .p-badge{
-                    clip-path: circle(8.5px at center);
-                    display: flex;
-                    position: absolute;
-                    top: -5px;
-                    right: -11px;
-                    background-color: var(--error);
-                    height: 17px;
-                    width: 17px;
-                    color: var(--white);
-                    justify-content: center;
-                    align-items: center;
-                    cursor: pointer;
-                }
-            }
-
-            &:has(.carrin-but #carrinho:checked) .dropdown-carrin{
-                visibility: visible;
-                opacity: 1;
-            }
-
-            & .dropdown-carrin {
-                background-color: var(--white);
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-                position: absolute;
-                padding: 30px;
-                right: 0px;
-                width: 315px;
-                height: 454px;
-                border-radius: 4px;
-                transition-duration: 300ms;
-                visibility: hidden;
-                opacity: 0;
-
-                & > p{
-                    color: var(--dark-gray-2);
-                    margin: 0;
-                }
-
-                & .prods {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 20px;
-
-                    & .wrapper{
-                        width: 255px;
-                        height: 93px;
-                        background-color: transparent;
-                        display: flex;
-                        flex-direction: row;
-                        justify-content: space-between;
-
-                        & img{
-                            width: 71px;
-                            height: 71px;
-                        }
-                        
-                        & .info {
-                            display: flex;
-                            justify-content: space-between;
-                            flex-direction: column;
-                            width: 150px;
-
-                            & .descricao {
-                                font-family: "Inter";
-                                font-size: 14px;
-                                font-weight: 700;
-                                line-height: 20px;
-                                letter-spacing: 0.75px;
-                                text-align: left;
-                                margin: 0;
-                                color: var(--dark-gray);
-                            }
-
-                            & .valores {
-                                display: flex;
-                                align-items: center;
-                                flex-direction: row;
-                                justify-content: space-around;
-
-                                & p{
-                                    margin: 0;
-                                }
-
-                                & .descontado{
-                                    color: var(--dark-gray-2);
-                                }
-                                & .valor {
-                                    font-family: Inter;
-                                    font-size: 12px;
-                                    font-weight: 400;
-                                    line-height: 28px;
-                                    letter-spacing: 0.75px;
-                                    text-align: center;
-                                    color: var(--light-gray-2);
-                                    text-decoration: line-through;
-                                }
-                            }
-                        }
-                    }
-
-                    &::before{
-                        content: "";
-                        width: 100%;
-                        height: 1px;
-                        background-color: var(--light-gray-2);
-                        bottom: calc(30px + 85px + 20px);
-                        margin-top: 10px
-                    }
-                    &::after{
-                        content: "";
-                        width: 100%;
-                        height: 1px;
-                        background-color: var(--light-gray-2);
-                        margin-bottom: 20px
-                    }
-
-                }
-
-                & .down{
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: space-between;
-                    height: 84px;
-
-                    & .total{
-                        display: flex;
-                        justify-content: space-between;
-                        height: auto;
-
-                        & p{
-                            margin: 0;
-                        }
-
-                        & .valor{
-                            color: var(--dark-gray-2);
-                        }
-
-                        & .num-valor{
-                            color: var(--dark-gray-2);
-                        }
-                    }
-
-                    & .ab{
-                        display: flex;
-                        justify-content: space-between;
-
-                        & .esvaziar {
-                            color: var(--dark-gray-2);
-                        }
-                    }
-                }
-            }
-        }
-    }
-`;
-
-const DigitalLogo = () => {
-    return (
-        <div className="flex items-center justify-between w-[138px] h-[24px] ml-[70px] md:h-[44px] md:w-[253px] md:m-0 z-[4] ">
-            <img src="Group.svg" className="mt-[2.73px] mb-[3.27px] w-[18px] h-[18px] md:ml-auto md:w-[33px] md:h-[33px] md:mt-[5px] md:mb-[6px] " />
-            <h1 className="text-primary-1 m-0 w-auto font-sans font-[600] text-[19.85px] leading-[24px] tracking-[-0.01rem] ">Digital Store</h1>
-        </div>
-    );
-}
-
-const Usuario = () => {
-    return (
-        <>
-            <div className="cadastre order-2 w-full text-center">
-                <Link to="/cadastro" className="c-text-small text-dark-gray-2">
-                    Cadastre-se
-                </Link>
-            </div>
-
-            {/* Link para Login */}
-            <div className="login w-full text-center">
-                <Link to="/login" className="w-full">
-                    <But className="c-text-extra-small font-bold w-full bg-primary-1 text-white py-2 rounded-md">
-                        Entrar
-                    </But>
-                </Link>
-            </div>
-        </>
-    )
-}
-
-const Links = ({menuOpen}) => { 
-    
-    return (
-        <div className={`bg-white z-[4] flex flex-col fixed top-[66.5px] left-0 h-[calc(100vh-66.5px)] w-[308px] p-[30px] shadow-[3px_2px_5px_rgba(0,0,0,0.1)] transition-all duration-500 transform ${menuOpen ? 'opacity-1' : 'translate-x-[-50%] opacity-0'} `} >
-            <p className="c-text-small font-bold m-0 text-dark-gray-2">Páginas</p>
-
-            <nav className="flex flex-col gap-[10px] mt-[20px]">
-                <NavLink to="/" className={(a) => `${whereNavLink(a)} c-text-small bold relative`} >Home</NavLink>
-                <NavLink to="/produtos" className={(a) => `${whereNavLink(a)} c-text-small bold relative`} >Produtos</NavLink>
-                <NavLink to="/categorias" className={(a) => `${whereNavLink(a)} c-text-small bold relative`} >Categorias</NavLink>
-                <NavLink to="/meu-perfil" className={(a) => `${whereNavLink(a)} c-text-small bold relative`} >Meus Pedidos</NavLink>
-            </nav>
-
-            <div className="absolute bottom-[calc(30px+85px+20px)] left-[30px] right-[30px] h-[1px] bg-light-gray-2 md:hidden"></div>
-
-            <div className="but-link mt-auto flex flex-col items-center gap-[17px] md:hidden">
-                <Usuario />
-            </div>
-        </div>
-    )
-}
-
-const whereNavLink = ({ isActive }) => {
-    return isActive 
-    ? "text-primary-1 w-fit after:block after:content-[''] after:border after:rounded after:h-[2px] after:border-transparent after:w-full after:bg-primary-1 transition-all duration-[500ms] after:duration-[500ms]" 
-    : "text-dark-gray-3 after:block after:content-[''] after:border after:border-transparent after:bg-transparent after:rounded after:h-[2px] after:w-0 transition-all duration-500"
+const Sidebar = ({ openSidebar }) => {
+
+  const navLinkStyles = useCallback(({ isActive }) => {
+    return `c-text-small relative transition-all duration-500 after:rounded-[2px] after:content-[''] after:duration-500 after:transition-all after:absolute after:left-0 after:bottom-[-4px] after:h-[2px] ${isActive
+      ? "text-primary-1 after:w-full after:bg-primary-1 bold"
+      : "text-dark-gray-2 after:w-0 after:bg-transparent hover:text-primary-1 hover:after:bg-primary-1"
+      }`;
+  }, [])
+
+  return (
+    <div className={`fixed top-[66.5px] left-0 h-full w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out dur ${openSidebar ? 'translate-x-0' : '-translate-x-full'}`}>
+      <h3 className="c-text-small bold ">Páginas</h3>
+      <nav className="p-4">
+        <ul>
+          <li className="mb-[10px] w-fit ">
+            <NavLink to="/" className={navLinkStyles}>Home</NavLink>
+          </li>
+          <li className="mb-[10px] w-fit">
+            <NavLink to="/produtos" className={navLinkStyles}>Products</NavLink>
+          </li>
+          <li className="mb-[10px] w-fit">
+            <NavLink to="/categorias" className={navLinkStyles}>Categories</NavLink>
+          </li>
+          <li className="w-fit">
+            <NavLink to="/meus-pedidos" className={navLinkStyles}>About Us</NavLink>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  );
 };
-
-const Carrin = () => {
-    return (
-        <div className="carrin">
-            <div className="carrin-but">
-                <input type="checkbox" id="carrinho" />
-                <label htmlFor="carrinho">
-                    <img src="Buy.svg" />
-                </label>
-                <label className="p-badge" htmlFor="carrinho">2</label>
-            </div>
-            <div className="dropdown-carrin">
-                <p className="c-text-small bold">Meu Carrinho</p>
-                <div className="prods">
-                    <div className="wrapper">
-                        <img src="Batata.png" alt="" />
-                        <div className="info">
-                            <p className="descricao c-title-small bold">
-                                Batata premium
-                            </p>
-                            <div className="valores">
-                                <p className="descontado c-text-small bold">
-                                    R$ 10,00
-                                </p>
-                                <p className="valor c-text-extra-small">
-                                    R$ 19,00
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="wrapper">
-                        <img src="Batata.png" alt="" />
-                        <div className="info">
-                            <p className="descricao c-title-small bold">
-                                Batata Premium
-                            </p>
-                            <div className="valores">
-                                <p className="descontado c-text-small bold">
-                                    R$ 10,00
-                                </p>
-                                <p className="valor c-text-extra-small">
-                                    R$ 19,00
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="down">
-                    <div className="total">
-                        <p className="valor c-text-small bold">Valor Total:</p>
-                        <p className="num-valor c-text-small bold">R$50,00</p>
-                    </div>
-                    <div className="ab">
-                        <Link className="c-text-small esvaziar" to="/" >Esvaziar</Link>
-                        <Link to='/meu-carrinho'>
-                            <But className="c-text-small bold ver-carrin-maior" label="Ver Carrinho" buttonType="primary" />
-                        </Link>
-                    </div>
-                </div>
-            </div>
-        </div>
-    )
-
-}
 
 const Header = () => {
 
-    // Verifica se a checkbox está selecionada ou não.
-    const [menuOpen, setMenuOpen] = useState(false);
-    const toggleMenu = () => {
-        setMenuOpen((menu) => !menu)
-    };
+  const [openSidebar, setOpenSidebar] = useState(false);
+  const handleSidebar = () => {
+    setOpenSidebar((option) => !option);
+  }
 
-    return (
-        <HeaderContainer>
-            <div className="container bg-white">
-                <div className="top-side">
+  return (
+    <>
+      <header className="w-full h-[66.5px] bg-white flex items-center justify-between p-[20px] fixed top-0 z-50">
+        <div className="menu-sidebar">
+          <label htmlFor="menu-sidebar">
+            <MenuIcon className="w-[24px] h-[24px] text-dark-gray " />
+          </label>
+          <input id="menu-sidebar" type="checkbox" onChange={handleSidebar} className="hidden" checked={openSidebar} >
+          </input>
+        </div>
 
-                    <div className="fundo bg-white" />
+        <div className="flex justify-center items-center gap-[4.36px] absolute left-[50%] translate-x-[-50%]">
+          <img src="digital.svg" alt="Logo" className="h-[18px]" />
+          <h1 className="text-primary-1 font-sans font-semibold text-[19.85px] leading-[24.03px] tracking-[-1%] ">Digital Store</h1>
+        </div>
 
-                    <label className="overlay" htmlFor="menu-sidebar"></label>
-                    <input type="checkbox" id="menu-sidebar" checked={menuOpen} onChange={toggleMenu} />
+        <div className="flex">
+          <button className="p-2">
+            <SearchIcon className="text-light-gray-2 " />
+          </button>
+          <button className="p-2 relative">
+            <ShoppingCartIcon className="text-primary-1 " />
+            <span className="font-sans w-[17px] absolute top-0 right-0 bg-red-500 [&&]:!bg-primary-1 text-white text-xs rounded-full flex items-center justify-center">
+              2
+            </span>
+          </button>
+        </div>
+      </header>
+      <Sidebar openSidebar={openSidebar} />
+    </>
+  );
+}
 
-                    <label className="menu-button" htmlFor="menu-sidebar">
-                        <img src="Menu.svg" />
-                    </label>
-                    <DigitalLogo />
-
-                    <input type="checkbox" id="search-buy" />
-                    <label className="out-search" htmlFor="search-buy">
-                        <img src="Search.svg" />
-                    </label>
-
-                    <div className="search-buy">
-                        <div className="MenuTopBarSearch">
-                            <input type="text" className="c-text-small" placeholder="Pesquisar produto..." />
-                            <Link to="/produtos">
-                                <img src="Search.svg" />
-                            </Link>
-                        </div>
-                    </div>
-                    <Usuario />
-
-                    <Carrin />
-                </div>
-                <Links menuOpen={menuOpen} />
-            </div>
-        </HeaderContainer>
-    );
-};
-
-export default Header;
+export default Header
