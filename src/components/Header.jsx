@@ -23,8 +23,7 @@
 import { MenuIcon, SearchIcon, ShoppingCartIcon } from "lucide-react"; // Exemplos de ícones
 import { useCallback, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-
-
+import { default as Button } from "./buttons/Buttons"
 
 const Sidebar = ({ openSidebar }) => {
 
@@ -85,12 +84,49 @@ const Header = () => {
           <button className="p-2">
             <SearchIcon className="text-light-gray-2 " />
           </button>
-          <button className="p-2 relative">
-            <ShoppingCartIcon className="text-primary-1 " />
-            <span className="font-sans w-[17px] absolute top-0 right-0 bg-red-500 [&&]:!bg-primary-1 text-white text-xs rounded-full flex items-center justify-center">
-              2
-            </span>
-          </button>
+          <div className="relative">
+            <button className="p-2 relative">
+              <ShoppingCartIcon className="text-primary-1 " />
+              <span className="font-sans w-[17px] absolute top-0 right-0 bg-red-500 [&&]:!bg-primary-1 text-white text-xs rounded-full flex items-center justify-center">
+                2
+              </span>
+            </button>
+
+            <div className="flex flex-col p-[30px] gap-[20px] absolute top-full right-5 shadow-lg shadow-black">
+              <h3 className="c-text-small bold text-dark-gray-2 ">Meu Carrinho</h3>
+              <div className="w-full h-[2px] bg-light-gray-2 border-0 "></div>
+
+              <div className="flex gap-[20px] w-[255px] justify-between ">
+                <div className="DIV-DA-IMAGEM flex justify-center bg-[#E2E3FF] min-w-[71.18px] h-[58px] rounded-[2.67px] ">
+                  <img className="h-full" src="Batata.png" alt="BATATA" />
+                </div>
+
+                <div className="flex flex-col gap-[5px] w-fit ">
+                  <p className="text-dark-gray font-bold font-sans text-[14px] leading-[20px] tracking-[0.75px] ">Lorem ipsum dolor sit amet consectetur batata</p>
+                  <div className="flex w-full">
+                    <p className="flex justify-center text-dark-gray-2 c-text-small bold w-[88px] ">R$100,00</p>
+                    <p className="flex justify-center w-[80px] text-light-gray-2 font-normal font-sans text-[12px] leading-[28px] tracking-[0.75px] line-through ">R$120,00</p>
+                  </div>
+                </div>
+
+              </div>
+
+
+              <div className="w-full h-[2px] bg-light-gray-2 border-0 "></div>
+
+              <div className="flex flex-col w-full gap-[20px]">
+                <div className="flex c-text-small bold justify-between w-full text-dark-gray ">
+                  <p className="c-text-small bold">Valor Total:</p>
+                  <p className="flex c-text-small bold text-error ">R$ 200,00</p>
+                </div>
+                <div className="flex justify-between items-center ">
+                  <p className="text-dark-gray-2 underline">Esvaziar</p>
+                  <Button buttonType='primary' className="w-[124.78px] rounded-[8px] c-text-extra-small bold" label="Ver Carrinho" ></Button>
+                </div>
+              </div>
+            </div>
+
+          </div>
         </div>
       </header>
       <Sidebar openSidebar={openSidebar} />
